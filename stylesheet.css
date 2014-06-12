@@ -3,7 +3,7 @@ html {
 }
 
 * {
-    font-family : courier, courier-ner, serif;
+    font-family : Courier-new, Courier, monospace;
     font-style  : normal;
     text-align  : left;
 }
@@ -26,13 +26,14 @@ html {
 
 #menu li {
     display: inline;
-    padding: 20px;
+    margin: 10px;
 }
 
 #menu a {
     padding 8px;
-    margin:0px;
+    display         : inline-block;
 }
+
 
 #text {
     color           : #000000;
@@ -41,6 +42,14 @@ html {
     padding         : 50px;
     max-width       : 680px;
     background-color: #f2f2f2;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
+    -o-column-count: 2;
+    -o-column-gap: 10px;
 }
 
 a {
@@ -49,7 +58,7 @@ a {
 }
 
 a:hover {
-    color           : #df7401;
+    color               : #df7401;
 }
 
 .footer {
@@ -57,6 +66,5 @@ a:hover {
     margin      : 100px;
     bottom      : 0px;
     padding     : 0;
-    width       : 100%;
 }
 

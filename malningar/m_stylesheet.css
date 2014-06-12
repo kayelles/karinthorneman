@@ -1,10 +1,55 @@
 
-#images {
-    margin:100px;
+#imageHolder {
+    display:inline-block;
+    margin-left: 100px;
+    overflow:auto;
 }
 
-.painting {
+#subHolder1 {
+    margin-top:0px;
+    cursor: pointer;
+    float : left;
 }
 
-.arrow {
+#subHolder2 {
+    margin-top:0px;
+    cursor: pointer;
+    float : left;
+}
+
+#subHolder3 {
+    margin-top:0px;
+    cursor: pointer;
+    float : left;
+}
+
+#subHolder1:hover {
+    opacity: 0.7;
+    display:block;
+}
+
+#subHolder1:hover #leftArrow {
+    display:block;
+}
+
+#subHolder3:hover {
+    opacity: 0.7;
+    display:block;
+}
+
+#subHolder3:hover #rightArrow {
+    display:block;
+}
+
+
+#leftArrow {
+    display:none;
+    font-size : 80px;
+    position : absolute;
+}
+
+#rightArrow {
+    display:none;
+    font-size : 80px;
+    position : absolute;
 }

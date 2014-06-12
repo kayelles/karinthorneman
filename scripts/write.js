@@ -9,12 +9,12 @@ function alterContent() {
     var div = document.getElementById('text');
     switch (div.className) {
         case "hem":
-            div.innerHTML = div.innerHTML + '<p>' + text + '</p>';
+            div.innerHTML = div.innerHTML + text;
             break;
         case "utstallningar":
-            div.innerHTML = div.innerHTML + '<p>' + text2 + '</p>';
+            div.innerHTML = div.innerHTML + text2;
         case "studio":
-            div.innerHTML = div.innerHTML + '<p>' + text3 + '</p>';
+            div.innerHTML = div.innerHTML + text3;
         default:
             break;
             
