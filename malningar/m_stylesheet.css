@@ -1,55 +1,28 @@
-
-#imageHolder {
-    display:inline-block;
-    margin-left: 100px;
-    overflow:auto;
-}
-
-#subHolder1 {
-    margin-top:0px;
-    cursor: pointer;
-    float : left;
-}
-
-#subHolder2 {
-    margin-top:0px;
-    cursor: pointer;
-    float : left;
-}
-
-#subHolder3 {
-    margin-top:0px;
-    cursor: pointer;
-    float : left;
-}
-
-#subHolder1:hover {
-    opacity: 0.7;
-    display:block;
-}
-
-#subHolder1:hover #leftArrow {
-    display:block;
-}
-
-#subHolder3:hover {
-    opacity: 0.7;
-    display:block;
-}
-
-#subHolder3:hover #rightArrow {
-    display:block;
+.image {
+    cursor : pointer;
+    position : relative;
+    overflow: hidden;
 }
 
 
-#leftArrow {
-    display:none;
-    font-size : 80px;
+.description {
+    margin-left : 50px;
     position : absolute;
 }
 
-#rightArrow {
-    display:none;
-    font-size : 80px;
-    position : absolute;
+.mega-octicon {
+    opacity : 0.2;
 }
+
+.mega-octicon:hover {
+    opacity : 1;
+    cursor : pointer;
+}
+
+.contentHolder {
+    position : relative;
+    overflow: hidden;
+}
+
+
+

@@ -12,9 +12,11 @@
                 rel     ="stylesheet" 
                 href    ="m_stylesheet.css"
                 media   ="screen" />
+        <link   rel     ="stylesheet" 
+                href    ="../fonts/octicons/octicons.css" />
     </head>
     <body>
-        <nav id="menu">
+        <div id="menu">
             <ul>
                 <li><a href="../hem/index.html">Hem</a></li>
                 <li>Målningar</li>
@@ -22,17 +24,18 @@
                 <li><a href="../utstallningar/index.html">Utställningar</a></li>
                 <li><a href="../kontakt/index.html">Kontakt</a></li>
             </ul>
-        </nav>
-        <div id="imageHolder">
-            <div id="subHolder1">
-                <div id="leftArrow">&lt</div>
-            </div>
-            <div id="subHolder2"></div>
-            <div id="subHolder3">
-                <div id="rightArrow">&gt</div>
-            </div>
+        </div>
+        
+        <div class="contentHolder">
+            <span class="image"></span>
+            <span class="description">Desciption </br> 1928 </br> shizzle foo zum biggie </br> holden kvartz 88 210</span>
+        <div id="arrowHolder" class="holder">
+            <span class="mega-octicon octicon-chevron-left left"></span>
+            <span class="mega-octicon octicon-chevron-right right"></span>
+        </div>
         </div>
 
+        </div>
 
         <div class="footer">
             <small id="copyright">
@@ -40,7 +43,8 @@
             </small>
         </div>
         <script src = "../scripts/jquery-1.11.1.min.js"></script>
-        <script src = "../scripts/imgcoll.js"></script>
+        <script src = "../scripts/write.js"></script>
+        <script src = "../scripts/imghandler.js"></script>
     </body>
 </html>
 

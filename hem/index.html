@@ -7,32 +7,38 @@
         <meta charset   =utf-8>
         <link   type    ="text/css" 
                 rel     ="stylesheet" 
-                href    ="h_stylesheet.css"
+                href    ="../stylesheet.css"
                 media   ="screen" />
+        <meta charset   =utf-8>
         <link   type    ="text/css" 
                 rel     ="stylesheet" 
-                href    ="../stylesheet.css"
+                href    ="h_stylesheet.css"
                 media   ="screen" />
     </head>
     <body>
-        <nav id="menu">
-            <ul>
-                <li>Hem</li>
-                <li><a href="../malningar/index.html">Målningar</a></li>
-                <li><a href="../studio/index.html">Studio</a></li>
-                <li><a href="../utstallningar/index.html">Utställningar</a></li>
-                <li><a href="../kontakt/index.html">Kontakt</a></li>
-            </ul>
-        </nav>
+        <div id="container">
+            <div id="menu">
+                <ul>
+                    <li>Hem</li>
+                    <li><a href="../malningar/index.html">Målningar</a></li>
+                    <li><a href="../studio/index.html">Studio</a></li>
+                    <li><a href="../utstallningar/index.html">Utställningar</a></li>
+                    <li><a href="../kontakt/index.html">Kontakt</a></li>
+                </ul>
+            </div>
 
-        <div id="text" class="hem"></div>
+            <div class="contentHolder">
+                <div class="text"></div>
+            </div>
 
-        <div class="footer">
-            <small id="copyright">
-                Copyright <a href="mailto:karin.thoreman@gmail.com">Karin Thorneman</a>
-            </small>
+            <div class="footer">
+                <small id="copyright">
+                    Copyright <a href="mailto:karin.thoreman@gmail.com">Karin Thorneman</a>
+                </small>
+            </div>
+
+            <script src="../scripts/jquery-1.11.1.min.js"></script>
+            <script src="../scripts/write.js"></script>
         </div>
-
-        <script src="../scripts/write.js"></script>
     </body>
 </html>
