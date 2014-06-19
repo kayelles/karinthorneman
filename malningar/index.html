@@ -16,7 +16,7 @@
                 href    ="../fonts/octicons/octicons.css" />
     </head>
     <body>
-        <div id="menu">
+        <div id="menu" class="fadeout">
             <ul>
                 <li><a href="../hem/index.html">Hem</a></li>
                 <li>Målningar</li>
@@ -27,24 +27,31 @@
         </div>
         
         <div class="contentHolder">
-            <span class="image"></span>
+            <span class="image clickable"></span>
             <span class="description">Desciption </br> 1928 </br> shizzle foo zum biggie </br> holden kvartz 88 210</span>
-        <div id="arrowHolder" class="holder">
-            <span class="mega-octicon octicon-chevron-left left"></span>
-            <span class="mega-octicon octicon-chevron-right right"></span>
-        </div>
+            <span id="togglefade"></span>
+            <div id="arrowHolder" class="holder">
+                <span class="mega-octicon octicon-chevron-left clickable fadeout">
+                </span>
+                <span class="mega-octicon octicon-chevron-right clickable fadeout">
+                </span>
+            </div>
         </div>
 
-        </div>
-
-        <div class="footer">
+        <div class="footer fadeout">
             <small id="copyright">
                 Copyright <a href="mailto:karin.thoreman@gmail.com">Karin Thorneman</a>
             </small>
         </div>
-        <script src = "../scripts/jquery-1.11.1.min.js"></script>
-        <script src = "../scripts/write.js"></script>
-        <script src = "../scripts/imghandler.js"></script>
+        <script language = "javascript" 
+                src = "../scripts/jquery-1.11.1.min.js">
+        </script>
+        <script language = "javascript" 
+                src = "../scripts/write.js">
+        </script>
+        <script language = "javascript"
+                src = "../scripts/mscript.js">
+        </script>
     </body>
 </html>
 
