@@ -1,22 +1,28 @@
 /* Script for the gallery page */
 
-var images = [];
+var images = []
+var descriptions = [];
+
 var index = 0;
 var fadeDelay = 10000;
 var timeout = null;
 var imageWidth, imageHeight;
 
-
-(function() {
-    images.push("../images/1.jpg");
-    images.push("../images/2.jpg");
-    images.push("../images/3.jpg");
-    images.push("../images/4.jpg");
-    images.push("../images/5.jpg");
-})();
-
 $(document).ready(function() {
-    renderImage(0);
+    $.ajax({
+        "type" : "post",
+        "url" : "../data/gimages.json",
+        "success" : function(data) {
+            for (var i = 0; i < data.imageData.length; i++) {
+                images.push(data.imageData[i].src);
+                descriptions.push(data.imageData[i].desc);
+            }
+            render(0);
+        },
+        "error" : function() {
+            alert("Error: Content could not be loaded");
+        }
+    });
 });
 
 $('#togglefade').mouseenter(function() {
@@ -97,21 +103,15 @@ $(document).on('mousemove', function() {
 });
 */
 
-
-
-
-
-
-function renderImage(index) {
-    $(document).ready(function() {
-        var img = $(".image");
-        if (img.children().length > 0) {
-            img.empty();
-        }
-        img.prepend('<img src="' + images[index] + '" />');
-        imageWidth = img.width();
-        renderArrows(index, img.width());
-    });
+function render(index) {
+    var img = $(".image");
+    var desc = $(".description");
+    img.empty();
+    desc.empty();
+    img.append('<img src="' + images[index] + '" />');
+    desc.append(descriptions[index]);
+    imageWidth = img.width();
+    renderArrows(index, imageWidth);
 }
 
 function renderArrows(index, width) {
@@ -138,14 +138,14 @@ function renderArrows(index, width) {
 function nextImage() {
     if (index < images.length - 1) {
         index++;
-        renderImage(index);
+        render(index);
     }
 }
 
 function previousImage() {
     if (index > 0) {
         index--;
-        renderImage(index); 
+        render(index); 
     }
 }
 
@@ -160,6 +160,12 @@ function fadeout(delay) {
 function showFaded() {
     $('.fadeout').css('opacity' , 1); 
     $('.mega-octicon').css('opacity', 0.2);
+    $('.mega-octicon').mouseenter(function() {
+        $(this).css('opacity', 1);
+    });
+    $('.mega-octicon').mouseleave(function() {
+        $(this).css('opacity', 0.2);
+    });
     $(".contentHolder").css({
         "border"  : "1px solid #bebebe",
     });

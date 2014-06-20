@@ -18,6 +18,7 @@
 
 .description {
     margin-left         : 50px;
+    margin-right        : 50px;
     position            : absolute;
     padding             : 10px;
     border-top-width    : 1px;
@@ -42,6 +43,5 @@
     position : relative;
     overflow: hidden;
 }
-
 
 
