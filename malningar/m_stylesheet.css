@@ -12,7 +12,6 @@
 
 .image {
     cursor : pointer;
-    position : relative;
     overflow: hidden;
 }
 

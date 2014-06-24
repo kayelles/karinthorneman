@@ -2,6 +2,7 @@
 
 var images = []
 var descriptions = [];
+var widths = [];
 
 var index = 0;
 var fadeDelay = 10000;
@@ -16,6 +17,7 @@ $(document).ready(function() {
             for (var i = 0; i < data.imageData.length; i++) {
                 images.push(data.imageData[i].src);
                 descriptions.push(data.imageData[i].desc);
+                widths.push(data.imageData[i].width);
             }
             render(0);
         },
@@ -108,9 +110,9 @@ function render(index) {
     var desc = $(".description");
     img.empty();
     desc.empty();
-    img.append('<img src="' + images[index] + '" />');
+    img.prepend('<img src="' + images[index] + '" />')
     desc.append(descriptions[index]);
-    imageWidth = img.width();
+    imageWidth = widths[index];
     renderArrows(index, imageWidth);
 }
 
