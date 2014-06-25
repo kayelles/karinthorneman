@@ -1,13 +1,22 @@
-/* Script for the gallery page */
+/* Script for the image gallery page */
+    
+// Arrays to be loaded with all data that can be displayed
 
 var images = []
 var descriptions = [];
 var widths = [];
 
+// variables
+
 var index = 0;
-var fadeDelay = 10000;
-var timeout = null;
 var imageWidth, imageHeight;
+
+/*
+    Main script
+    
+    Uses ajax to load data from server
+    Handles user interaction with the page
+*/
 
 $(document).ready(function() {
     $.ajax({
@@ -20,22 +29,28 @@ $(document).ready(function() {
                 widths.push(data.imageData[i].width);
             }
             render(0);
+            
+            $('#togglefade').on({
+                mouseenter : function() { fadeout(0); },
+                mouseleave : function() {
+                    $(".fadeout").stop();
+                    showFaded();
+                }
+            });
+
+            $('.clickable').on('click', function(e) { handleClick() });
+
+            $(document).on("keydown", function(e) { handleKeyDown() });
         },
-        "error" : function() {
-            alert("Error: Content could not be loaded");
-        }
+        "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
 
-$('#togglefade').mouseenter(function() {
-    fadeout(0);
-});
-$('#togglefade').mouseleave(function() {
-    $(".fadeout").stop();
-    showFaded();
-});
+/*
+    Handles the event when an element is clicked 
+*/
 
-$('.clickable').on('click', function(e) {
+function handleClick() {
     if ($(this).hasClass('image')) {
         var mx = e.pageX;
         var my = e.pageY;
@@ -54,9 +69,13 @@ $('.clickable').on('click', function(e) {
     else {
         nextImage();
     }
-});
+}
 
-$(document).on("keydown", (function(e) {
+/*
+    Handles the event when a key is pressed
+*/
+
+function handleKeyPress() {
     if (e.which == 37) {
         previousImage();
         showFaded();
@@ -67,13 +86,15 @@ $(document).on("keydown", (function(e) {
         showFaded();
         $(".fadeout").stop();
     }
-}));
+}
 
 /*
 ------------------------------------------------------
 This commented out section supports automatic fade out
 --------------------------------------------------------
 
+var fadeDelay = 1000;
+var timeout = null;
 fadeout(0);
 $(document).on("keydown", (function(e) {
     if (e.which == 37) {
@@ -105,23 +126,37 @@ $(document).on('mousemove', function() {
 });
 */
 
+
+/*
+    Renders the content that to be displayed
+*/
+
 function render(index) {
     var img = $(".image");
     var desc = $(".description");
+
     img.empty();
     desc.empty();
-    img.prepend('<img src="' + images[index] + '" />')
+
+    img.append('<img src="' + images[index] + '" />')
     desc.append(descriptions[index]);
+
     imageWidth = widths[index];
     renderArrows(index, imageWidth);
 }
+
+/*
+    Creates and positions the navigation arrows
+*/
 
 function renderArrows(index, width) {
     var arrows      = $('.mega-octicon');
     var leftArrow   = $('.octicon-chevron-left');
     var rightArrow  = $('.octicon-chevron-right');
+
     arrows.css("font-size", 48);
     rightArrow.css("left", width - 54);
+
     if (index == images.length - 1) {
         rightArrow.css("display" , "none");
     }
@@ -137,12 +172,20 @@ function renderArrows(index, width) {
     }
 }
 
+/*
+    Request the next image
+*/
+
 function nextImage() {
     if (index < images.length - 1) {
         index++;
         render(index);
     }
 }
+
+/*
+    Request the previous image
+*/
 
 function previousImage() {
     if (index > 0) {
@@ -151,6 +194,9 @@ function previousImage() {
     }
 }
 
+/*
+    Attempts to fade out some elements
+*/
 
 function fadeout(delay) {
     $(".fadeout").delay(delay).animate({"opacity" : 0}, 1500);
@@ -158,6 +204,10 @@ function fadeout(delay) {
         "border-color"  : "#f2f2f2",
     });
 }
+
+/*
+    Shows any faded out elements
+*/
 
 function showFaded() {
     $('.fadeout').css('opacity' , 1); 
