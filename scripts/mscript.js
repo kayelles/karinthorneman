@@ -121,7 +121,7 @@ function renderArrows(index, width) {
     var leftArrow   = $('.octicon-chevron-left');
     var rightArrow  = $('.octicon-chevron-right');
     arrows.css("font-size", 48);
-    rightArrow.css("left", width - 44);
+    rightArrow.css("left", width - 54);
     if (index == images.length - 1) {
         rightArrow.css("display" , "none");
     }
