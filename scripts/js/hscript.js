@@ -4,7 +4,7 @@ $(document).ready(function() {
         "type" : "get",
         "url" : "../data/text.json",
         "success" : function(data) {
-            $(".text").append(data.texts.text100);
+            $(".text").append(data.texts.intro);
         },
         "error" : function(data) {
             alert("Error: Content could not be loaded");

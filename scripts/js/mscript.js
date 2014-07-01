@@ -21,12 +21,12 @@ var imageWidth, imageHeight;
 $(document).ready(function() {
     $.ajax({
         "type" : "post",
-        "url" : "../data/gimages.json",
+        "url" : "../data/imagedata.json",
         "success" : function(data) {
-            for (var i = 0; i < data.imageData.length; i++) {
-                images.push(data.imageData[i].src);
-                descriptions.push(data.imageData[i].desc);
-                widths.push(data.imageData[i].width);
+            for (var i = 0; i < data.length; i++) {
+                images.push(data[i].src);
+                descriptions.push(data[i].desc);
+                widths.push(data[i].width);
             }
             render(0);
             
@@ -38,9 +38,9 @@ $(document).ready(function() {
                 }
             });
 
-            $('.clickable').on('click', function(e) { handleClick() });
+            $('.clickable').on('click', function(e) { handleClick($(this), e) });
 
-            $(document).on("keydown", function(e) { handleKeyDown() });
+            $(document).on("keydown", function(e) { handleKeyPress(e) });
         },
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
@@ -50,11 +50,11 @@ $(document).ready(function() {
     Handles the event when an element is clicked 
 */
 
-function handleClick() {
-    if ($(this).hasClass('image')) {
+function handleClick(caller, e) {
+    if (caller.hasClass('image')) {
         var mx = e.pageX;
         var my = e.pageY;
-        var osx = $(this).offset().left;
+        var osx = caller.offset().left;
         var relx = mx - osx;
         if (relx < imageWidth / 2) {
             previousImage();
@@ -63,7 +63,7 @@ function handleClick() {
             nextImage();
         }
     }
-    else if ($(this).hasClass('octicon-chevron-left')) {
+    else if (caller.hasClass('octicon-chevron-left')) {
         previousImage();
     }
     else {
@@ -75,7 +75,7 @@ function handleClick() {
     Handles the event when a key is pressed
 */
 
-function handleKeyPress() {
+function handleKeyPress(e) {
     if (e.which == 37) {
         previousImage();
         showFaded();
@@ -140,6 +140,13 @@ function render(index) {
 
     img.append('<img src="' + images[index] + '" />')
     desc.append(descriptions[index]);
+    
+    /* ensure the contentholder is big enough for the content */
+
+    $(document).ready(function() {
+        var min_width = img.width() + desc.width() + 300;
+        $("body").css("min-width", min_width);
+    });
 
     imageWidth = widths[index];
     renderArrows(index, imageWidth);

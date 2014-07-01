@@ -1,1 +1,37 @@
-[{"id":"001","src":"imagesource2","desc":"description2","width":"200","height":"300"}]
+[
+    {
+        "id":"001",
+        "src":"../images/tavlor/t01.jpg",
+        "desc":"lekstugan 156 x 140 akryl på duk",
+        "width":"640",
+        "height":"589"
+    },
+    {
+        "id":"002",
+        "src":"../images/tavlor/t02.jpg",
+        "desc":"reflexion 170 x 130 akryl på duk",
+        "width":"640",
+        "height":"488"
+    },
+    {
+        "id":"003",
+        "src":"../images/tavlor/t03.jpg",
+        "desc":"canyon, händelse vid canyon 130 x 100 akryl på duk",
+        "width":"640",
+        "height":"491"
+    },
+    {
+        "id":"004",
+        "src":"../images/tavlor/t04.jpg",
+        "desc":"strand, baksidan 130 x 93 cm akryl på duk",
+        "width":"640",
+        "height":"455"
+    },
+    {
+        "id":"005",
+        "src":"../images/tavlor/t05.jpg",
+        "desc":"yes , en känsla 94 x 130 cm akryl på duk",
+        "width":"452",
+        "height":"640"
+    }
+]
