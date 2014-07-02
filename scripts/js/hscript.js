@@ -1,4 +1,5 @@
 
+
 $(document).ready(function() {
     $.ajax({
         "type" : "get",
@@ -8,6 +9,18 @@ $(document).ready(function() {
         },
         "error" : function(data) {
             alert("Error: Content could not be loaded");
+        }
+    });
+    $.ajax({
+        "type" : "post",
+        "url" : "../scripts/php/imagehandler.php",
+        "data" : {action : "resizeImage"},
+        "success" : function(data) {
+            $(".image").append('<img src="' + "../images/b3.jpg" + '" />');
+            alert(data);
+        },
+        "error" : function() {
+            alert("Error: cannot execute script");
         }
     });
 });
