@@ -37,21 +37,55 @@ $(document).ready(function() {
                     showFaded();
                 }
             });
-
             $('.clickable').on('click', function(e) { handleClick($(this), e) });
-
             $(document).on("keydown", function(e) { handleKeyPress(e) });
+
+            $("#image").hover(function() {
+                $(this).on("mousemove", function(e) { handleImageHover($(this), e)});
+            });
         },
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
 
 /*
+    Handles the cursor if hovering over an image
+*/
+
+function handleImageHover(caller, e) {
+    if (index == 0 || index == images.length - 1) {
+        var mx = e.pageX;
+        var my = e.pageY;
+        var osx = caller.offset().left;
+        var relx = mx - osx;
+        if (index == 0) {
+            if (relx > imageWidth / 2) {
+                caller.css("cursor" , "pointer");
+            }
+            else {
+                caller.css("cursor" , "auto");
+            }
+        }
+        else {
+            if (relx < imageWidth / 2) {
+                caller.css("cursor" , "pointer");
+            }
+            else {
+                caller.css("cursor" , "auto");
+            }
+        }
+    }
+    else {
+        caller.css("cursor" , "pointer");
+    }
+}
+
+/*
     Handles the event when an element is clicked 
 */
 
 function handleClick(caller, e) {
-    if (caller.hasClass('image')) {
+    if (caller.is('#image')) {
         var mx = e.pageX;
         var my = e.pageY;
         var osx = caller.offset().left;
@@ -132,8 +166,8 @@ $(document).on('mousemove', function() {
 */
 
 function render(index) {
-    var img = $(".image");
-    var desc = $(".description");
+    var img = $("#image");
+    var desc = $("#description");
 
     img.empty();
     desc.empty();
@@ -149,6 +183,12 @@ function render(index) {
     });
 
     imageWidth = widths[index];
+    var whichimage = $("#whichimage");
+    whichimage.empty();
+    whichimage.append((index + 1) + "/" + images.length);
+    whichimage.css("left", imageWidth / 2 - 5);
+
+
     renderArrows(index, imageWidth);
 }
 
@@ -162,7 +202,8 @@ function renderArrows(index, width) {
     var rightArrow  = $('.octicon-chevron-right');
 
     arrows.css("font-size", 48);
-    rightArrow.css("left", width - 54);
+    rightArrow.css("left", width - 60);
+
 
     if (index == images.length - 1) {
         rightArrow.css("display" , "none");
@@ -207,9 +248,6 @@ function previousImage() {
 
 function fadeout(delay) {
     $(".fadeout").delay(delay).animate({"opacity" : 0}, 1500);
-    $(".contentHolder").css({
-        "border-color"  : "#f2f2f2",
-    });
 }
 
 /*
@@ -224,9 +262,6 @@ function showFaded() {
     });
     $('.mega-octicon').mouseleave(function() {
         $(this).css('opacity', 0.2);
-    });
-    $(".contentHolder").css({
-        "border"  : "1px solid #bebebe",
     });
 }
 

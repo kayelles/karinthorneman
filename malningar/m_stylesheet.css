@@ -4,18 +4,17 @@
     position : absolute;
     border-radius: 10px;
     -webkit-border-radius: 10px;
-    right : 25px;
-    bottom : 25px;
+    right : 50px;
+    bottom : 50px;
     width : 50px;
     height : 50px;
 }
 
-.image {
-    cursor : pointer;
+#image {
     overflow: hidden;
 }
 
-.description {
+#description {
     margin-left         : 50px;
     margin-right        : 50px;
     position            : absolute;
@@ -38,9 +37,9 @@
     cursor : pointer;
 }
 
-.contentHolder {
-    position : relative;
-    overflow: hidden;
+#whichimage {
+    position    : absolute;
+    margin-top  : 20px;
 }
 
 
