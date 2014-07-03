@@ -1,10 +1,13 @@
+/* Probably alot of dead code in this script needs a cleanng*/
+
 /* Script for the image gallery page */
     
 // Arrays to be loaded with all data that can be displayed
 
-var images = []
+var imagelist = []
 var descriptions = [];
 var widths = [];
+var heights = [];
 
 // variables
 
@@ -24,14 +27,17 @@ $(document).ready(function() {
         "url" : "../data/imagedata.json",
         "success" : function(data) {
             for (var i = 0; i < data.length; i++) {
-                images.push(data[i].src);
+                imagelist.push(data[i].src);
                 descriptions.push(data[i].desc);
                 widths.push(data[i].width);
+                heights.push(data[i].height);
             }
-            render(0);
+            addImages();
+            showImage(index)
+            renderSidebar(index);
             
             $('#togglefade').on({
-                mouseenter : function() { fadeout(0); },
+                mouseenter : function() { fadeout(); },
                 mouseleave : function() {
                     $(".fadeout").stop();
                     showFaded();
@@ -40,7 +46,7 @@ $(document).ready(function() {
             $('.clickable').on('click', function(e) { handleClick($(this), e) });
             $(document).on("keydown", function(e) { handleKeyPress(e) });
 
-            $("#image").hover(function() {
+            $("#images").hover(function() {
                 $(this).on("mousemove", function(e) { handleImageHover($(this), e)});
             });
         },
@@ -53,7 +59,7 @@ $(document).ready(function() {
 */
 
 function handleImageHover(caller, e) {
-    if (index == 0 || index == images.length - 1) {
+    if (index == 0 || index == imagelist.length - 1) {
         var mx = e.pageX;
         var my = e.pageY;
         var osx = caller.offset().left;
@@ -85,24 +91,24 @@ function handleImageHover(caller, e) {
 */
 
 function handleClick(caller, e) {
-    if (caller.is('#image')) {
-        var mx = e.pageX;
-        var my = e.pageY;
-        var osx = caller.offset().left;
-        var relx = mx - osx;
-        if (relx < imageWidth / 2) {
+        if (caller.is('#images')) {
+            var mx = e.pageX;
+            var my = e.pageY;
+            var osx = caller.offset().left;
+            var relx = mx - osx;
+            if (relx < imageWidth / 2) {
+                previousImage();
+            }
+            else {
+                nextImage();
+            }
+        }
+        else if (caller.hasClass('octicon-chevron-left')) {
             previousImage();
         }
         else {
             nextImage();
         }
-    }
-    else if (caller.hasClass('octicon-chevron-left')) {
-        previousImage();
-    }
-    else {
-        nextImage();
-    }
 }
 
 /*
@@ -160,36 +166,68 @@ $(document).on('mousemove', function() {
 });
 */
 
-
 /*
     Renders the content that to be displayed
 */
 
-function render(index) {
-    var img = $("#image");
+function addImages() {
+    var images = $("#images");
+    for (i = 0; i < imagelist.length; i++) {
+        images.append('<img class="hidden" src="' + imagelist[i] + '" />')
+    }
+    var firstImage = images.children().first();
+    images.children().css({
+        "position" : "absolute",
+        "top" : 0,
+        "left" : 250,
+        "opacity" : 0
+    });
+    firstImage.css({
+    });
+}
+
+function hideImage(index) {
+    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
+    image.animate({"opacity" : 0}, 500);
+}
+
+function showImage(index) {
+    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
+    image.animate({"opacity" : 1}, 500);
+    imageWidth = widths[index];
+    imageHeight = heights[index];
+}
+
+function renderSidebar() {
+    $("#control").css("height", imageHeight);
     var desc = $("#description");
 
-    img.empty();
     desc.empty();
 
-    img.append('<img src="' + images[index] + '" />')
     desc.append(descriptions[index]);
     
+    var whichimage = $("#whichimage");
+    whichimage.empty();
+    whichimage.append((index + 1) + "/" + imagelist.length);
+}
+
+
+function render(index) {
+    
+    
+
+
     /* ensure the contentholder is big enough for the content */
 
+/*
     $(document).ready(function() {
         var min_width = img.width() + desc.width() + 300;
         $("body").css("min-width", min_width);
     });
 
-    imageWidth = widths[index];
-    var whichimage = $("#whichimage");
-    whichimage.empty();
-    whichimage.append((index + 1) + "/" + images.length);
-    whichimage.css("left", imageWidth / 2 - 5);
-
-
     renderArrows(index, imageWidth);
+
+    */
 }
 
 /*
@@ -201,11 +239,7 @@ function renderArrows(index, width) {
     var leftArrow   = $('.octicon-chevron-left');
     var rightArrow  = $('.octicon-chevron-right');
 
-    arrows.css("font-size", 48);
-    rightArrow.css("left", width - 60);
-
-
-    if (index == images.length - 1) {
+    if (index == imagelist.length - 1) {
         rightArrow.css("display" , "none");
     }
     else if (index == 0) {
@@ -225,10 +259,10 @@ function renderArrows(index, width) {
 */
 
 function nextImage() {
-    if (index < images.length - 1) {
-        index++;
-        render(index);
-    }
+    hideImage(index);
+    index < imagelist.length - 1 ? index++ : index = 0;
+    showImage(index);
+    renderSidebar(index);
 }
 
 /*
@@ -236,18 +270,18 @@ function nextImage() {
 */
 
 function previousImage() {
-    if (index > 0) {
-        index--;
-        render(index); 
-    }
+    hideImage(index);
+    index > 0 ? index-- : index = imagelist.length - 1;
+    showImage(index);
+    renderSidebar(index);
 }
 
 /*
     Attempts to fade out some elements
 */
 
-function fadeout(delay) {
-    $(".fadeout").delay(delay).animate({"opacity" : 0}, 1500);
+function fadeout() {
+    $(".fadeout").animate({"opacity" : 0}, 1500);
 }
 
 /*

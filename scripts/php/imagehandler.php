@@ -2,8 +2,8 @@
 
     // VARIABLES
     
-    $readpath = 'images/woman.jpg';
-    $percentage = 87;
+    $readpath = 'images/reflexion.jpg';
+    $percentage = 90;
 
     $resizefactor = $percentage / 100;
     

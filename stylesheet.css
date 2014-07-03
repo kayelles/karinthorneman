@@ -35,31 +35,25 @@ body {
 }
 
 #container {
-    position        : absolute;
-    width           : 1000px;
-    height          : auto;
-    top             : 0px;
-    left            : 50%;
-    margin-left     : -500px;
 
-    border-top      : 1px solid #bebebe; 
-    border-left     : 1px solid #bebebe; 
-    border-right    : 1px solid #bebebe; 
-    border-bottom   : 1px solid #bebebe; 
+    /* Position */
+    position            : absolute;
+    width               : 1000px;
+    height              : auto;
+    top                 : 0px;
+    left                : 50%;
+    margin-left         : -500px;
+
+    /* border */
+    border-top          : 1px solid #bebebe; 
+    border-left         : 1px solid #bebebe; 
+    border-right        : 1px solid #bebebe; 
+    border-bottom       : 1px solid #bebebe; 
+    box-shadow          : 0px 0px 8px 0px #bebebe;
+    -webkit-box-shadow  : 0px 0px 4px 0px #bebebe;
 
     background-color: #f5f5f5;
 }
-
-#contentHolder {
-    font-family     : sspl, 'Arial Black', Gadget, Sans-serif;
-    background-color: #f5f5f5;
-    position        : relative;
-    color           : #000000;
-    font-size       : 16px;
-    margin          : 50px;
-    padding-bottom  : 50px;
-    border-bottom   : 1px solid #bebebe; 
-} 
 
 #menu {
     font-family     : sspl, 'Arial Black', Gadget, Sans-serif;
@@ -98,10 +92,24 @@ a:hover {
     color: #df7401;
 }
 
+#contentHolder {
+    font-family     : sspl, 'Arial Black', Gadget, Sans-serif;
+    background-color: #f5f5f5;
+    position        : relative;
+    color           : #000000;
+    font-size       : 16px;
+    margin          : 50px;
+    padding-bottom  : 50px;
+    height : 550px;
+} 
+
+
 #footer {
+    border : 1px solid red;
     /* use position:fixed to stick it to the bottom */
     font-family     : sspl, 'Arial Black', Gadget, Sans-serif;
-    margin-left : 5%;
-    margin-bottom : 7%;
+    margin-left : 50px; 
+    margin-right : 50px; 
+    margin-bottom : 100px;
 }
 

@@ -3,7 +3,8 @@
 }
 
 #text {
-    width : 45%;
+    width : 350px;
+
 }
 
 #image {
@@ -11,4 +12,13 @@
     position : absolute;
     right : 0px;
     top : 0px;
+}
+
+#description {
+    height : auto;
+    position : absolute;
+    right : 450px;
+    margin-top : -30px;
+    padding : 5px;
+    font-style: italic;
 }
