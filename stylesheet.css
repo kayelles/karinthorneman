@@ -23,10 +23,6 @@
     src         : url('fonts/anonpro/Anonymous_Pro.ttf') format('TrueType');
 }
 
-html, body {
-   
-}
-
 body {
     background-color: #ffffff;
     font-style      : normal;
@@ -100,14 +96,14 @@ a:hover {
     font-size       : 16px;
     margin          : 50px;
     padding-bottom  : 50px;
-    height : 550px;
 } 
 
 
 #footer {
-    border : 1px solid red;
     /* use position:fixed to stick it to the bottom */
     font-family     : sspl, 'Arial Black', Gadget, Sans-serif;
+    border-top: 1px solid #bebebe;
+    padding-top : 50px;
     margin-left : 50px; 
     margin-right : 50px; 
     margin-bottom : 100px;

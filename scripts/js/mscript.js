@@ -1,18 +1,18 @@
-/* Probably alot of dead code in this script needs a cleanng*/
-
 /* Script for the image gallery page */
-    
-// Arrays to be loaded with all data that can be displayed
 
-var imagelist = []
-var descriptions = [];
-var widths = [];
-var heights = [];
-
-// variables
+// global variables
 
 var index = 0;
-var imageWidth, imageHeight;
+var exh = "2014";
+
+// The object that is to be loaded with server data
+
+var imageData = {
+    "paths"     : [],
+    "descs"     : [],
+    "widths"    : [],
+    "heights"   : []
+};
 
 /*
     Main script
@@ -26,65 +26,42 @@ $(document).ready(function() {
         "type" : "post",
         "url" : "../data/imagedata.json",
         "success" : function(data) {
+
+            // Load data 
+
             for (var i = 0; i < data.length; i++) {
-                imagelist.push(data[i].src);
-                descriptions.push(data[i].desc);
-                widths.push(data[i].width);
-                heights.push(data[i].height);
+                imageData["paths"].push(data[i].src)
+                imageData["descs"].push(data[i].desc)
+                imageData["widths"].push(data[i].width)
+                imageData["heights"].push(data[i].height)
             }
-            addImages();
+
+            // Initialize rendering
+
+            addImages("2014");
             showImage(index)
             renderSidebar(index);
             
+            // Handle events
+
+            /*
             $('#togglefade').on({
-                mouseenter : function() { fadeout(); },
+                click : function() { 
+                    fadeout();
+                },
                 mouseleave : function() {
                     $(".fadeout").stop();
                     showFaded();
                 }
             });
+            */
             $('.clickable').on('click', function(e) { handleClick($(this), e) });
             $(document).on("keydown", function(e) { handleKeyPress(e) });
 
-            $("#images").hover(function() {
-                $(this).on("mousemove", function(e) { handleImageHover($(this), e)});
-            });
         },
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
-
-/*
-    Handles the cursor if hovering over an image
-*/
-
-function handleImageHover(caller, e) {
-    if (index == 0 || index == imagelist.length - 1) {
-        var mx = e.pageX;
-        var my = e.pageY;
-        var osx = caller.offset().left;
-        var relx = mx - osx;
-        if (index == 0) {
-            if (relx > imageWidth / 2) {
-                caller.css("cursor" , "pointer");
-            }
-            else {
-                caller.css("cursor" , "auto");
-            }
-        }
-        else {
-            if (relx < imageWidth / 2) {
-                caller.css("cursor" , "pointer");
-            }
-            else {
-                caller.css("cursor" , "auto");
-            }
-        }
-    }
-    else {
-        caller.css("cursor" , "pointer");
-    }
-}
 
 /*
     Handles the event when an element is clicked 
@@ -96,18 +73,26 @@ function handleClick(caller, e) {
             var my = e.pageY;
             var osx = caller.offset().left;
             var relx = mx - osx;
-            if (relx < imageWidth / 2) {
-                previousImage();
+            if (relx < imageData["widths"][index] / 2) {
+                updateImage(false);
             }
             else {
-                nextImage();
+                updateImage(true);
             }
         }
         else if (caller.hasClass('octicon-chevron-left')) {
-            previousImage();
+            updateImage(false);
+        }
+
+        // working on this part
+        else if (e.target.id == "1") {
+            alert(e.target.id);
+        }
+        else if (caller.is("#2")) {
+            alert(e.target.id);
         }
         else {
-            nextImage();
+            updateImage(true);
         }
 }
 
@@ -117,167 +102,100 @@ function handleClick(caller, e) {
 
 function handleKeyPress(e) {
     if (e.which == 37) {
-        previousImage();
+        updateImage(false);
         showFaded();
         $(".fadeout").stop();
     }
     else if (e.which == 39) {
-        nextImage();
+        updateImage(true);
         showFaded();
         $(".fadeout").stop();
     }
 }
 
-/*
-------------------------------------------------------
-This commented out section supports automatic fade out
---------------------------------------------------------
-
-var fadeDelay = 1000;
-var timeout = null;
-fadeout(0);
-$(document).on("keydown", (function(e) {
-    if (e.which == 37) {
-        previousImage();
-        showFaded();
-        $(".fadeout").stop();
-        clearTimeout(timeout)
-        fadeout(fadeDelay);
-    }
-    else if (e.which == 39) {
-        nextImage();
-        showFaded();
-        $(".fadeout").stop();
-        clearTimeout(timeout)
-        fadeout(fadeDelay);
-    }
-}));
-
-$(document).on('mousemove', function() {
-    if (timeout !== null) {
-        clearTimeout(timeout)
-        showFaded();
-        $(".fadeout").stop();
-    }
-    timeout = setTimeout(function() {
-        timeout = null;
-        fadeout(0);
-    }, fadeDelay);
-});
-*/
 
 /*
-    Renders the content that to be displayed
+    Appends images to the webpage
 */
 
-function addImages() {
-    var images = $("#images");
-    for (i = 0; i < imagelist.length; i++) {
-        images.append('<img class="hidden" src="' + imagelist[i] + '" />')
+function addImages(exhibition) {
+    var images          = $("#images");
+    var largestWidth    = 0 
+    var largestHeight   = 0;
+
+    if (exhibition == "2014") {
+
+        for (i = 0; i < imageData["paths"].length; i++) {
+            images.append('<img class="hidden" src="' 
+                            + imageData["paths"][i] + '" />')
+            if (imageData["widths"][i] > largestWidth) {
+                largestWidth = imageData["widths"][i];
+            }
+            if (imageData["heights"][i] > largestHeight) {
+                largestHeight = imageData["heights"][i];
+            }
+        }
+        images.css({
+            "width" : largestWidth,
+            "height" : largestHeight
+        });
+        images.children().css({
+            "position" : "absolute",
+            "top" : 0,
+            "left" : 0,
+            "opacity" : 0
+        });
     }
-    var firstImage = images.children().first();
-    images.children().css({
-        "position" : "absolute",
-        "top" : 0,
-        "left" : 250,
-        "opacity" : 0
-    });
-    firstImage.css({
-    });
+    else if (exhibition == "2010") {
+        //foo...
+    }
 }
+
+/* Displays an image with index index  */
+
+function showImage(index) {
+    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
+    image.animate({"opacity" : 1}, 500);
+}
+
+/* Hides an image with index index  */
 
 function hideImage(index) {
     var image = $("#images").find(":nth-child(" + (index + 1) + ")");
     image.animate({"opacity" : 0}, 500);
 }
 
-function showImage(index) {
-    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
-    image.animate({"opacity" : 1}, 500);
-    imageWidth = widths[index];
-    imageHeight = heights[index];
-}
+/* Renders the container next to the image and its contents */
 
 function renderSidebar() {
-    $("#control").css("height", imageHeight);
-    var desc = $("#description");
-
+    $("#control").css("height", imageData["heights"][index]);
+    var desc        = $("#description");
+    var whichimage  = $("#whichimage");
     desc.empty();
-
-    desc.append(descriptions[index]);
-    
-    var whichimage = $("#whichimage");
+    desc.append(imageData["descs"][index]);
     whichimage.empty();
-    whichimage.append((index + 1) + "/" + imagelist.length);
-}
-
-
-function render(index) {
-    
-    
-
-
-    /* ensure the contentholder is big enough for the content */
-
-/*
-    $(document).ready(function() {
-        var min_width = img.width() + desc.width() + 300;
-        $("body").css("min-width", min_width);
-    });
-
-    renderArrows(index, imageWidth);
-
-    */
+    whichimage.append((index + 1) + "/" + imageData["paths"].length);
 }
 
 /*
-    Creates and positions the navigation arrows
+    Display a new image. If the boolean flag next is true, display
+    the next image. Else, display the previous image.
 */
 
-function renderArrows(index, width) {
-    var arrows      = $('.mega-octicon');
-    var leftArrow   = $('.octicon-chevron-left');
-    var rightArrow  = $('.octicon-chevron-right');
-
-    if (index == imagelist.length - 1) {
-        rightArrow.css("display" , "none");
-    }
-    else if (index == 0) {
-        leftArrow.css("display" , "none");
-        rightArrow.css("left", width - 20);
-    }
-    else if (rightArrow.css("display") == "none") {
-        rightArrow.css("display" , "inline");
-    }
-    else if (leftArrow.css("display") == "none") {
-        leftArrow.css("display" , "inline");
-    }
-}
-
-/*
-    Request the next image
-*/
-
-function nextImage() {
+function updateImage(next) {
     hideImage(index);
-    index < imagelist.length - 1 ? index++ : index = 0;
+    if (next) {
+        index < imageData["paths"].length - 1 ? index++ : index = 0;
+    }
+    else {
+        index > 0 ? index-- : index = imageData["paths"].length - 1;
+    }
     showImage(index);
     renderSidebar(index);
 }
 
 /*
-    Request the previous image
-*/
-
-function previousImage() {
-    hideImage(index);
-    index > 0 ? index-- : index = imagelist.length - 1;
-    showImage(index);
-    renderSidebar(index);
-}
-
-/*
-    Attempts to fade out some elements
+    Attempts to fade out elements that is a member of class "fadeout"
 */
 
 function fadeout() {
@@ -285,7 +203,7 @@ function fadeout() {
 }
 
 /*
-    Shows any faded out elements
+    Shows faded out elements
 */
 
 function showFaded() {
