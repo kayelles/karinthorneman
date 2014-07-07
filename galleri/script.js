@@ -3,6 +3,7 @@
 // global variables
 
 var index = 0;
+var imageList = [];
 var exh = "2014";
 
 // The object that is to be loaded with server data
@@ -13,6 +14,7 @@ var imageData = {
     "widths"    : [],
     "heights"   : []
 };
+
 
 /*
     Main script
@@ -68,7 +70,7 @@ $(document).ready(function() {
 */
 
 function handleClick(caller, e) {
-        if (caller.is('#images')) {
+        if (caller.is("#imageWrapper")) {
             var mx = e.pageX;
             var my = e.pageY;
             var osx = caller.offset().left;
@@ -126,8 +128,7 @@ function addImages(exhibition) {
     if (exhibition == "2014") {
 
         for (i = 0; i < imageData["paths"].length; i++) {
-            images.append('<img class="hidden" src="' 
-                            + imageData["paths"][i] + '" />')
+            images.append('<img src="' + imageData["paths"][i] + '" />')
             if (imageData["widths"][i] > largestWidth) {
                 largestWidth = imageData["widths"][i];
             }
@@ -145,6 +146,9 @@ function addImages(exhibition) {
             "left" : 0,
             "opacity" : 0
         });
+        $.each(images.children("img"), function(key, value) {
+            imageList.push(value);
+        });
     }
     else if (exhibition == "2010") {
         //foo...
@@ -154,15 +158,19 @@ function addImages(exhibition) {
 /* Displays an image with index index  */
 
 function showImage(index) {
-    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
-    image.animate({"opacity" : 1}, 500);
+    var image = imageList[index];
+    $(image).animate({"opacity" : 1}, 500);
+    $("#imageWrapper").css({
+        "height": imageData["heights"][index],
+        "width": imageData["widths"][index],
+    });
 }
 
 /* Hides an image with index index  */
 
 function hideImage(index) {
-    var image = $("#images").find(":nth-child(" + (index + 1) + ")");
-    image.animate({"opacity" : 0}, 500);
+    var image = imageList[index];
+    $(image).animate({"opacity" : 0}, 500);
 }
 
 /* Renders the container next to the image and its contents */
