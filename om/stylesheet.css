@@ -1,5 +1,23 @@
-#text {
+
+#about {
+    position : absolute;
     width : 400px;
+}
+
+#exhib {
+    position : relative;
+    width : 400px;
+    left : 450px;
+    top : 0px;
+    padding-left : 50px;
+    border-left : 1px solid #bebebe
+
+}
+
+#exhib li {
+    list-style-type : none;
+    padding         : 10px;
+    margin-left     : -50px;
 }
 
 

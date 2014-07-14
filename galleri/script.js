@@ -43,6 +43,8 @@ $(document).ready(function() {
             addImages("2014");
             showImage(index)
             renderSidebar(index);
+            var screenheight = screen.height;
+            $("#container").css("min-height", $(window).height() + 100);
             
             // Handle events
 
