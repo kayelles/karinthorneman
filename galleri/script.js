@@ -44,7 +44,12 @@ $(document).ready(function() {
             showImage(index)
             renderSidebar(index);
             var screenheight = screen.height;
-            $("#container").css("min-height", $(window).height() + 100);
+            if ($(window).height() > 1000) {
+                $("#container").css("height", $(window).height());
+            }
+            else {
+                $("#container").css("height", 1000);
+            }
             
             // Handle events
 
