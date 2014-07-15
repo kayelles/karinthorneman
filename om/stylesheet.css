@@ -1,23 +1,31 @@
+#upper {
+    padding-bottom: 50px;
+}
 
+#lower {
+    padding-top : 50px;
+    border-top : 1px solid #bebebe;
+}
 #about {
-    position : absolute;
-    width : 400px;
+    width : 300px;
 }
 
 #exhib {
-    position : relative;
+    position : absolute;
     width : 400px;
-    left : 450px;
-    top : 0px;
-    padding-left : 50px;
-    border-left : 1px solid #bebebe
-
 }
 
 #exhib li {
     list-style-type : none;
     padding         : 10px;
     margin-left     : -50px;
+}
+
+#contactinfo {
+    position : relative;
+    left : 400px;
+    top : 0px;
+    width : 400px;
 }
 
 

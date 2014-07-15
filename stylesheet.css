@@ -66,27 +66,29 @@ body {
 }
 
 #menu {
+    width           : 900px;
     margin-left     : 50px;
     margin-right    : 50px;
     font-size       : 16px;
-    text-align      : center;
+    text-align      : right;
     border-bottom   : 1px solid #bebebe;
-    margin-left     : 50px;
 }
 
 #menu ul {
-    padding : 0px;
-    margin  : 0px;
-    margin-left : 500px;
+    padding         : 0px;
+    margin-bottom   : 0px;
+    margin-top      : 0px;
+    margin-left     : 0px;
+    margin-right    : 50px;
 }
 
 #menu li {
     position        : relative;
     display         : inline-block;
     margin-bottom   : 10px;
-    margin-left: 0px;
-    margin-right: 0px;
-    width : 80px;
+    margin-left     : 0px;
+    margin-right    : 0px;
+    width           : 80px;
 }
 
 a:hover {
