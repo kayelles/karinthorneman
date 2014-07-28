@@ -4,10 +4,10 @@
 
     // VARIABLES
     
-    $filepath = '../data/imagedata.json';
+    $filepath = '../../data/imagedata.json';
 
-    $imageid        = "006";
-    $imagesrc       = '../images/tavlor/t07.jpg';
+    $imageid        = "008";
+    $imagesrc       = '../images/tavlor/t08.jpg';
     $imagedesc      = "betjäning under maktnes kupol 120 x 130 akriyl på duk";
     $imagewidth     = "588";
     $imageheight    = "640";
@@ -41,7 +41,7 @@
                 array_push($temparray, $image);
             }
             else if (strcmp($action, "remove") == 0) {
-                $temparray = delete_at_index($temparray, "007");
+                $temparray = delete_at_index($temparray, "006");
             }
             else {
                 echo "unknown action";

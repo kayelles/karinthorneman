@@ -18,7 +18,7 @@
         <meta charset   =utf-8>
     </head>
     <body>
-        <form action="imagehandler.php" method="post">
+        <form action="add/index.php" method="post">
             <input  type="submit" 
                     name="addImage"
                     value="Add pictures" /></br>
@@ -26,7 +26,7 @@
                     name="action"
                     value="add" /></br>
         </form>
-        <form action="imagehandler.php" method="post">
+        <form action="remove/index.php" method="post">
             <input  type="submit" 
                     name="removeImage"
                     value="Remove pictures" /></br>
