@@ -28,11 +28,10 @@ $(document).ready(function() {
         "type" : "post",
         "url" : "../../../data/imagedata.json",
         "success" : function(data) {
-
             // Load data 
 
             for (var i = 0; i < data.length; i++) {
-                imageData["paths"].push(data[i].src)
+                imageData["paths"].push("../../" + data[i].src)
                 imageData["descs"].push(data[i].desc)
                 imageData["widths"].push(data[i].width)
                 imageData["heights"].push(data[i].height)
@@ -51,19 +50,6 @@ $(document).ready(function() {
                 $("#container").css("height", 1000);
             }
             
-            // Handle events
-
-            /*
-            $('#togglefade').on({
-                click : function() { 
-                    fadeout();
-                },
-                mouseleave : function() {
-                    $(".fadeout").stop();
-                    showFaded();
-                }
-            });
-            */
             $('.clickable').on('click', function(e) { handleClick($(this), e) });
             $(document).on("keydown", function(e) { handleKeyPress(e) });
 
@@ -100,9 +86,13 @@ function handleClick(caller, e) {
         else if (caller.is("#2")) {
             alert(e.target.id);
         }
+        else if (caller.is("#remover")) {
+            removeImage();
+        }
         else {
             updateImage(true);
         }
+
 }
 
 /*
@@ -113,13 +103,20 @@ function handleKeyPress(e) {
     if (e.which == 37) {
         updateImage(false);
         showFaded();
-        $(".fadeout").stop();
     }
     else if (e.which == 39) {
         updateImage(true);
         showFaded();
-        $(".fadeout").stop();
     }
+    else if (e.which == 13) {
+        removeImage();
+    }
+}
+
+function removeImage() {
+    $.post("remove.php", {index:index, path:imageData["paths"][index] }, function(data){
+        alert("data loaded: " + data);
+    });
 }
 
 

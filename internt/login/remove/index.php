@@ -1,9 +1,7 @@
 <?php
     session_start();
 
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    }
-    else {
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
         echo "please log in to see this page</br>";
         die();
     }
@@ -32,9 +30,9 @@
         </noscript>
         <div id = "container"> 
             <div id="header">
-                <div id="logo">
-                    <h2>Karin Thorneman</h2>
-                </div>
+                <h2>Ta bort bilder</h2>
+                <p>Bläddra till den bild du vill ta bort och klicka på krysset eller tryck
+                på returtangenten</p>
             </div>
         
             <div id="contentHolder">
@@ -45,27 +43,23 @@
                     </ul>
                     <div id="arrowHolder" class="holder">
                         <span class="mega-octicon octicon-chevron-left 
-                                        clickable fadeout">
+                                        clickable">
                         </span>
                         <span id="whichimage" class="fadeout"></span>
                         <span class="mega-octicon octicon-chevron-right 
-                                        clickable fadeout">
+                                        clickable">
                         </span>
                     </div>
-                    <div id="description" class="fadeout"></div>
-<!--                    <div id="togglefade" class="fadeout"><p>Tona ut</p></div>
--->
+                    <div id="remover" class="mega-octicon octicon-x clickable"></div>
+                    <form action="../index.php">
+                        <input type="submit" value="tillbaka" />
+                    </form>
                 </div>
                 <div id="images">
                     <div id="imageWrapper" class="clickable"></div>
                 </div>
             </div>
 
-            <div id="footer" class="fadeout">
-                <small id="copyright">
-                    Copyright <a href="mailto:karin.thoreman@gmail.com">Karin Thorneman</a>
-                </small>
-            </div>
         </div>
         <script language = "javascript" 
                 src = "../../../scripts/js/jquery-1.11.1.min.js">

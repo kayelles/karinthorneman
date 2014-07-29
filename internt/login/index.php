@@ -1,27 +1,26 @@
 <?php
     session_start();
 
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-        echo "Welcome to the members area</br>";
-    }
-    else {
-        echo "please log in to see this page</br>";
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+        echo "<p>please log in to see this page</p>";
         die();
     }
+
 ?>
 
 <!doctype html>
 
 <html lang="sv">
     <head>
-        <title>Intert</title>
-        <meta charset   =utf-8>
+        <title>Interna funktiioner</title>
+        <meta charset="utf-8">
     </head>
     <body>
+        <h3>Välkommen</h3>
         <form action="add/index.php" method="post">
             <input  type="submit" 
                     name="addImage"
-                    value="Add pictures" /></br>
+                    value="Ladda upp bilder" /></br>
             <input  type="hidden" 
                     name="action"
                     value="add" /></br>
@@ -29,23 +28,15 @@
         <form action="remove/index.php" method="post">
             <input  type="submit" 
                     name="removeImage"
-                    value="Remove pictures" /></br>
+                    value="Ta bort bilder" /></br>
             <input  type="hidden" 
                     name="action"
                     value="remove" /></br>
         </form>
-        <form action="main.php" method="post">
-            <input  type="submit" 
-                    name="resizeImage"
-                    value="rezise pics" /></br>
-            <input  type="hidden" 
-                    name="action" 
-                    value="resize" /></br>
-        </form>
         <form action="logout.php" method="post">
             <input  type="submit" 
                     name="logout"
-                    value="Log out" /></br>
+                    value="Logga ut" /></br>
         </form>
     </body>
 </html>
