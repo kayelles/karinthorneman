@@ -51,7 +51,8 @@
                         </span>
                     </div>
                     <div id="remover" class="mega-octicon octicon-x clickable"></div>
-                    <form action="../index.php">
+                    </br>
+                    <form id="back" method="get" action="../index.php">
                         <input type="submit" value="tillbaka" />
                     </form>
                 </div>

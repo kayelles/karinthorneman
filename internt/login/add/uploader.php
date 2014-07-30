@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
 try {
    
@@ -54,7 +55,6 @@ try {
         throw new RuntimeException('Failed to move uploaded file.');
     }
 
-    echo '<p>File is uploaded successfully.</p>';
 
     $filesrc = $imagehash . "." . $ext;
     $filesrc_rel_datadir = "../uploads/" . $filesrc;
@@ -64,21 +64,18 @@ try {
     $width = $size[0];
     $height = $size[1];
 
-    echo 'Updating web page....</br></br>';
     addImage(   "../../../data/imagedata.json", 
                 $filesrc_rel_datadir, 
                 $_POST['description'],
                 $width,
                 $height );
-    echo 'done';
 
-            
-
-
-
+    $_SESSION['upload_message'] = "Filen har laddats upp";
+    header("Location: index.php");
 } 
 catch (RuntimeException $e) {
     echo $e->getMessage();
+    $_SESSION['upload_message'] = "Filen kunde inte laddas upp. Kontakta serveradministratören";
 }
 
 function addImage(  $filepath, 
@@ -107,9 +104,6 @@ function addImage(  $filepath,
                     $largestID = $image_properties['id'];
                 }
             }
-            else {
-                echo "Encountered a problem while reading data : unefined id\n";
-            }
         }
 
         $image = array();
@@ -130,12 +124,3 @@ function addImage(  $filepath,
 }
 
 ?>
-<html>
-    <head></head>
-    <body>
-        <form action="index.php">
-            <input type="submit" value="Back" />
-        </form>
-
-    </body>
-</html>

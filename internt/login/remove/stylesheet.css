@@ -54,14 +54,6 @@
     left : 25px;
 }
 
-#description {
-    position            : relative;
-    padding             : 10px;
-    margin-top : 25px;
-    color : #666666;
-}
-
-
 .mega-octicon {
     position : relative;
     opacity : 0.2;
@@ -83,5 +75,12 @@
     cursor: pointer;
 }
 
+#header {
+    padding-left: 50px;
+}
+
+#back {
+    margin-top: 50px;
+}
 
 

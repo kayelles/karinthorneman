@@ -115,7 +115,7 @@ function handleKeyPress(e) {
 
 function removeImage() {
     $.post("remove.php", {index:index, path:imageData["paths"][index] }, function(data){
-        alert("data loaded: " + data);
+        window.location.href = "index.php";
     });
 }
 
@@ -126,36 +126,41 @@ function removeImage() {
 
 function addImages(exhibition) {
     var images          = $("#images");
-    var largestWidth    = 0 
-    var largestHeight   = 0;
-
-    if (exhibition == "2014") {
-
-        for (i = 0; i < imageData["paths"].length; i++) {
-            images.append('<img src="' + imageData["paths"][i] + '" />')
-            if (imageData["widths"][i] > largestWidth) {
-                largestWidth = imageData["widths"][i];
-            }
-            if (imageData["heights"][i] > largestHeight) {
-                largestHeight = imageData["heights"][i];
-            }
-        }
-        images.css({
-            "width" : largestWidth,
-            "height" : largestHeight
-        });
-        images.children().css({
-            "position" : "absolute",
-            "top" : 0,
-            "left" : 0,
-            "opacity" : 0
-        });
-        $.each(images.children("img"), function(key, value) {
-            imageList.push(value);
-        });
+    if (imageData['paths'].length == 0)  {
+        images.append('<h3>Det finns inga bilder att ta bort!</h3>');
     }
-    else if (exhibition == "2010") {
-        //foo...
+    else {
+        var largestWidth    = 0 
+        var largestHeight   = 0;
+
+        if (exhibition == "2014") {
+
+            for (i = 0; i < imageData["paths"].length; i++) {
+                images.append('<img src="' + imageData["paths"][i] + '" />')
+                if (imageData["widths"][i] > largestWidth) {
+                    largestWidth = imageData["widths"][i];
+                }
+                if (imageData["heights"][i] > largestHeight) {
+                    largestHeight = imageData["heights"][i];
+                }
+            }
+            images.css({
+                "width" : largestWidth,
+                "height" : largestHeight
+            });
+            images.children().css({
+                "position" : "absolute",
+                "top" : 0,
+                "left" : 0,
+                "opacity" : 0
+            });
+            $.each(images.children("img"), function(key, value) {
+                imageList.push(value);
+            });
+        }
+        else if (exhibition == "2010") {
+            //foo...
+        }
     }
 }
 
@@ -181,12 +186,14 @@ function hideImage(index) {
 
 function renderSidebar() {
     $("#control").css("height", imageData["heights"][index]);
-    var desc        = $("#description");
     var whichimage  = $("#whichimage");
-    desc.empty();
-    desc.append(imageData["descs"][index]);
     whichimage.empty();
-    whichimage.append((index + 1) + "/" + imageData["paths"].length);
+    if (imageData['paths'].length == 0)  {
+        whichimage.append("0/0");
+    }
+    else {
+        whichimage.append((index + 1) + "/" + imageData["paths"].length);
+    }
 }
 
 /*
