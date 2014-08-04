@@ -9,6 +9,7 @@ var exh = "2014";
 // The object that is to be loaded with server data
 
 var imageData = {
+    "ids"       : [],
     "paths"     : [],
     "descs"     : [],
     "widths"    : [],
@@ -31,10 +32,11 @@ $(document).ready(function() {
             // Load data 
 
             for (var i = 0; i < data.length; i++) {
-                imageData["paths"].push("../../" + data[i].src)
-                imageData["descs"].push(data[i].desc)
-                imageData["widths"].push(data[i].width)
-                imageData["heights"].push(data[i].height)
+                imageData["ids"].push(data[i].id);
+                imageData["paths"].push("../../" + data[i].src);
+                imageData["descs"].push(data[i].desc);
+                imageData["widths"].push(data[i].width);
+                imageData["heights"].push(data[i].height);
             }
 
             // Initialize rendering
@@ -114,7 +116,7 @@ function handleKeyPress(e) {
 }
 
 function removeImage() {
-    $.post("remove.php", {index:index, path:imageData["paths"][index] }, function(data){
+    $.post("remove.php", {id:imageData["ids"][index], path:imageData["paths"][index] }, function(data){
         window.location.href = "index.php";
     });
 }
