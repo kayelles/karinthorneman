@@ -65,6 +65,7 @@ try {
     $height = $size[1];
 
     addImage(   "../../../data/imagedata.json", 
+                $_POST['exhib'],
                 $filesrc_rel_datadir, 
                 $_POST['description'],
                 $width,
@@ -79,6 +80,7 @@ catch (RuntimeException $e) {
 }
 
 function addImage(  $filepath, 
+                    $imageexh,
                     $imagesrc, 
                     $imagedesc, 
                     $imagewidth, 
@@ -108,6 +110,7 @@ function addImage(  $filepath,
 
         $image = array();
         $image['id']        = (string)($largestID + 1); 
+        $image['exh']       = $imageexh;
         $image['src']       = $imagesrc;
         $image['desc']      = $imagedesc;
         $image['width']     = $imagewidth;

@@ -29,6 +29,13 @@
             </textarea>
             </br>
             </br>
+            <p>Välj utställning:</p>
+            <select size="2" name="exhib">
+                <option value="2014">2014</option>
+                <option value="2010">2010</option>
+            </select>
+            </br>
+            </br>
             <input  type="submit" 
                     value="Ladda upp" />
         </form>

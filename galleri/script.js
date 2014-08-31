@@ -5,7 +5,8 @@
 var index = 0;
 var imageCount = 0;
 var imageList = [];
-var exh = "2014";
+var exhibition = "2014";
+var screenheight = 0;
 
 // The object that is to be loaded with server data
 
@@ -43,16 +44,7 @@ $(document).ready(function() {
 
             // Initialize rendering
 
-            addImages("2014");
-            showImage(index)
-            renderSidebar(index);
-            var screenheight = screen.height;
-            if ($(window).height() > 1000) {
-                $("#container").css("height", $(window).height());
-            }
-            else {
-                $("#container").css("height", 1000);
-            }
+            render();
             
             // Handle events
 
@@ -63,6 +55,19 @@ $(document).ready(function() {
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
+
+function render() {
+    addImages();
+    showImage(index);
+    renderSidebar(index);
+    screenheight = screen.height;
+    if ($(window).height() > 1000) {
+        $("#container").css("height", $(window).height());
+    }
+    else {
+        $("#container").css("height", 1000);
+    }
+}
 
 /*
     Handles the event when an element is clicked 
@@ -87,10 +92,12 @@ function handleClick(caller, e) {
 
         // working on this part
         else if (e.target.id == 1) {
-            alert(e.target.id);
+            exhibition = "2014";
+            render();
         }
         else if (e.target.id == 2) {
-            alert(e.target.id);
+            exhibition = "2010";
+            render();
         }
         else {
             updateImage(true);
@@ -119,21 +126,21 @@ function handleKeyPress(e) {
     Appends images to the webpage
 */
 
-function addImages(exhibition) {
+function addImages() {
     var images          = $("#images");
-    var largestWidth    = 0 
+    var largestWidth    = 0;
     var largestHeight   = 0;
-    
+   
+    // Reinitialize image references
     images.empty();
-    imageCount = 0;
+    imageCount  = 0;
+    imageList   = [];
 
-    if (exhibition == "2014") {
 
-        for (i = 0; i < imageData["paths"].length; i++) {
-            if (imageData["exhibitions"][i] == "2014") {
-                images.append('<img src="' + imageData["paths"][i] + '" />');
-                imageCount++;
-            }
+    for (i = 0; i < imageData["paths"].length; i++) {
+        if (imageData["exhibitions"][i] == exhibition) {
+            images.append('<img src="' + imageData["paths"][i] + '" />');
+            imageCount++;
             if (imageData["widths"][i] > largestWidth) {
                 largestWidth = imageData["widths"][i];
             }
@@ -141,23 +148,20 @@ function addImages(exhibition) {
                 largestHeight = imageData["heights"][i];
             }
         }
-        images.css({
-            "width" : largestWidth,
-            "height" : largestHeight
-        });
-        images.children().css({
-            "position" : "absolute",
-            "top" : 0,
-            "left" : 0,
-            "opacity" : 0
-        });
-        $.each(images.children("img"), function(key, value) {
-            imageList.push(value);
-        });
     }
-    else if (exhibition == "2010") {
-        //foo...
-    }
+    images.css({
+        "width" : largestWidth,
+        "height" : largestHeight
+    });
+    images.children().css({
+        "position" : "absolute",
+        "top" : 0,
+        "left" : 0,
+        "opacity" : 0
+    });
+    $.each(images.children("img"), function(key, value) {
+        imageList.push(value);
+    });
 }
 
 /* Displays an image with index index  */
