@@ -3,16 +3,18 @@
 // global variables
 
 var index = 0;
+var imageCount = 0;
 var imageList = [];
 var exh = "2014";
 
 // The object that is to be loaded with server data
 
 var imageData = {
-    "paths"     : [],
-    "descs"     : [],
-    "widths"    : [],
-    "heights"   : []
+    "exhibitions"   : [],
+    "paths"         : [],
+    "descs"         : [],
+    "widths"        : [],
+    "heights"       : []
 };
 
 
@@ -32,10 +34,11 @@ $(document).ready(function() {
             // Load data 
 
             for (var i = 0; i < data.length; i++) {
-                imageData["paths"].push(data[i].src)
-                imageData["descs"].push(data[i].desc)
-                imageData["widths"].push(data[i].width)
-                imageData["heights"].push(data[i].height)
+                imageData["exhibitions"].push(data[i].exh);
+                imageData["paths"].push(data[i].src);
+                imageData["descs"].push(data[i].desc);
+                imageData["widths"].push(data[i].width);
+                imageData["heights"].push(data[i].height);
             }
 
             // Initialize rendering
@@ -53,17 +56,6 @@ $(document).ready(function() {
             
             // Handle events
 
-            /*
-            $('#togglefade').on({
-                click : function() { 
-                    fadeout();
-                },
-                mouseleave : function() {
-                    $(".fadeout").stop();
-                    showFaded();
-                }
-            });
-            */
             $('.clickable').on('click', function(e) { handleClick($(this), e) });
             $(document).on("keydown", function(e) { handleKeyPress(e) });
 
@@ -94,10 +86,10 @@ function handleClick(caller, e) {
         }
 
         // working on this part
-        else if (e.target.id == "1") {
+        else if (e.target.id == 1) {
             alert(e.target.id);
         }
-        else if (caller.is("#2")) {
+        else if (e.target.id == 2) {
             alert(e.target.id);
         }
         else {
@@ -131,11 +123,17 @@ function addImages(exhibition) {
     var images          = $("#images");
     var largestWidth    = 0 
     var largestHeight   = 0;
+    
+    images.empty();
+    imageCount = 0;
 
     if (exhibition == "2014") {
 
         for (i = 0; i < imageData["paths"].length; i++) {
-            images.append('<img src="' + imageData["paths"][i] + '" />')
+            if (imageData["exhibitions"][i] == "2014") {
+                images.append('<img src="' + imageData["paths"][i] + '" />');
+                imageCount++;
+            }
             if (imageData["widths"][i] > largestWidth) {
                 largestWidth = imageData["widths"][i];
             }
@@ -189,7 +187,7 @@ function renderSidebar() {
     desc.empty();
     desc.append(imageData["descs"][index]);
     whichimage.empty();
-    whichimage.append((index + 1) + "/" + imageData["paths"].length);
+    whichimage.append((index + 1) + "/" + imageCount);
 }
 
 /*
@@ -200,10 +198,10 @@ function renderSidebar() {
 function updateImage(next) {
     hideImage(index);
     if (next) {
-        index < imageData["paths"].length - 1 ? index++ : index = 0;
+        index < imageCount - 1 ? index++ : index = 0;
     }
     else {
-        index > 0 ? index-- : index = imageData["paths"].length - 1;
+        index > 0 ? index-- : index = imageCount - 1;
     }
     showImage(index);
     renderSidebar(index);
