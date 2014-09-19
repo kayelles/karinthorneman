@@ -36,6 +36,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < data.length; i++) {
                 imageData["ids"].push(data[i].id);
+                imageData["exhibitions"].push(data[i].exh);
                 imageData["paths"].push("../../" + data[i].src);
                 imageData["descs"].push(data[i].desc);
                 imageData["widths"].push(data[i].width);
@@ -138,7 +139,7 @@ function removeImage() {
 */
 
 function addImages() {
-    var images          = $("#images");
+    var images = $("#images");
     if (imageData['paths'].length == 0)  {
         images.append('<h3>Det finns inga bilder att ta bort!</h3>');
     }
@@ -149,11 +150,9 @@ function addImages() {
         images.empty();
         imageCount = 0;
         imageList = [];
-
-
-
         for (i = 0; i < imageData["paths"].length; i++) {
             if (imageData["exhibitions"][i] == exhibition) {
+				imageCount++;
                 images.append('<img src="' + imageData["paths"][i] + '" />')
                 if (imageData["widths"][i] > largestWidth) {
                     largestWidth = imageData["widths"][i];

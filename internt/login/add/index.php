@@ -22,16 +22,16 @@
             </br>
             </br>
             <p>Ge bilden en beskrivning:</p>
-            <textarea   name="description" 
-                        value=""
-                        rows="4"
-                        cols="40" >
-            </textarea>
+            <textarea 	name="description" 
+						value="" 
+						rows="3" 
+						cols="50" 
+						wrap="physical"></textarea>
             </br>
             </br>
             <p>Välj utställning:</p>
             <select size="2" name="exhib">
-                <option value="2014">2014</option>
+                <option selected="selected" value="2014">2014</option>
                 <option value="2010">2010</option>
             </select>
             </br>

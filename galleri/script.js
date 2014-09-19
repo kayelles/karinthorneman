@@ -200,15 +200,17 @@ function renderSidebar() {
 */
 
 function updateImage(next) {
-    hideImage(index);
-    if (next) {
-        index < imageCount - 1 ? index++ : index = 0;
-    }
-    else {
-        index > 0 ? index-- : index = imageCount - 1;
-    }
-    showImage(index);
-    renderSidebar(index);
+	if (imageCount >= 2) {
+		hideImage(index);
+		if (next) {
+			index < imageCount - 1 ? index++ : index = 0;
+		}
+		else {
+			index > 0 ? index-- : index = imageCount - 1;
+		}
+		showImage(index);
+		renderSidebar(index);
+	}
 }
 
 /*

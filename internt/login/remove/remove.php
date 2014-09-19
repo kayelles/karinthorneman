@@ -6,6 +6,7 @@
     
     // Remove the file from uploads
     unlink($image_filepath) or die("Could not delete the image");
+	
 
     // Remove the files data from the json file
 
@@ -13,16 +14,17 @@
 
     $data_array = json_decode($input);
 
-    $update_data_array = delete_at_id($data_array, $image_id);
+    $updated_data_array = delete_at_id($data_array, $image_id);
+
 
     if ($updated_data_array == null) {
         $updated_data_array = [];
     }
 
     $jsondata = json_encode($updated_data_array);
+	
+    file_put_contents($data_filepath, $jsondata) or die("failed to write to file");
 
-    file_put_contents($data_filepath, $jsondata) 
-        or die("failed to write to file");
     
     function delete_at_id($array, $id) {
         $ret = [];
