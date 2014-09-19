@@ -1,4 +1,17 @@
+
 /* Script for the image gallery page */
+
+/*========================================================================== */ 
+/*	Global TODO list  														 */ 
+
+/*	[ ] Fix the front page 													 */ 
+/*	[ ] Fix the bug with remove 											 */ 
+/*	[ ] make images abele to pop out 										 */ 
+/*	[ ] Add error checking for file and user input							 */ 
+/*	[ ] Add functionality for updating description and text fields  		 */ 
+/*	[ ] Fix bug with description not corresponding to correct image 		 */ 
+
+/*===========================================================================*/ 
 
 // global variables
 
@@ -8,7 +21,7 @@ var imageList = [];
 var exhibition = "2014";
 var screenheight = 0;
 
-// The object that is to be loaded with server data
+/*	The object that is to be loaded with server data*/
 
 var imageData = {
     "exhibitions"   : [],
@@ -18,13 +31,9 @@ var imageData = {
     "heights"       : []
 };
 
-
-/*
-    Main script
-    
-    Uses ajax to load data from server
-    Handles user interaction with the page
-*/
+/*	Main script
+ *
+ *	Loads data from server and handles user interaction */ 
 
 $(document).ready(function() {
     $.ajax({
@@ -89,14 +98,15 @@ function handleClick(caller, e) {
         else if (caller.hasClass('octicon-chevron-left')) {
             updateImage(false);
         }
-
         // working on this part
         else if (e.target.id == 1) {
             exhibition = "2014";
+			index = 0;
             render();
         }
         else if (e.target.id == 2) {
             exhibition = "2010";
+			index = 0;
             render();
         }
         else {
