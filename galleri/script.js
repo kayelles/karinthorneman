@@ -1,19 +1,24 @@
 
 /* Script for the image gallery page */
 
-/*========================================================================== */ 
-/*	Global TODO list  														 */ 
-
-/*	[ ] Fix the front page 													 */ 
-/*	[ ] Fix the bug with remove 											 */ 
-/*	[ ] make images abele to pop out 										 */ 
-/*	[ ] Add error checking for file and user input							 */ 
-/*	[ ] Add functionality for updating description and text fields  		 */ 
-/*	[ ] Fix bug with description not corresponding to correct image 		 */ 
-
+/*========================================================================== *
+*	TODO list  														         * 
+*                                                                            *
+*	[ ] Fix the front page 													 * 
+*	[ ] Fix the bug with remove 											 * 
+*	[x] make images able to pop out 										 * 
+*	[ ] fix gallery page (limit clicks, make pop out image bigger)           *
+*	[ ] Add error checking for file and user input							 * 
+*	[ ] Add functionality for updating description and text fields  		 * 
+*	[ ] Fix bug with description not corresponding to correct image 		 * 
+*                                                                            *
 /*===========================================================================*/ 
 
+
 // global variables
+
+/*  Idea, add an active class to clickable elements and remove / add it before after
+ *  finishing animating. Check for it before starting animation */ 
 
 var index = 0;
 var imageCount = 0;
@@ -57,7 +62,9 @@ $(document).ready(function() {
             
             // Handle events
 
-            $('.clickable').on('click', function(e) { handleClick($(this), e) });
+            $('.clickable').on('click', function(e) { 
+                handleClick($(this), e)
+            });
             $(document).on("keydown", function(e) { handleKeyPress(e) });
 
         },
@@ -65,8 +72,9 @@ $(document).ready(function() {
     });
 });
 
+
 function render() {
-    addImages();
+    getImagedata();
     showImage(index);
     renderSidebar(index);
     screenheight = screen.height;
@@ -83,35 +91,30 @@ function render() {
 */
 
 function handleClick(caller, e) {
-        if (caller.is("#imageWrapper")) {
-            var mx = e.pageX;
-            var my = e.pageY;
-            var osx = caller.offset().left;
-            var relx = mx - osx;
-            if (relx < imageData["widths"][index] / 2) {
-                updateImage(false);
-            }
-            else {
-                updateImage(true);
-            }
+    if (caller.hasClass('octicon-chevron-left')) {
+        index--;
+        if (index < 0) {
+            index = imageCount - 1;
         }
-        else if (caller.hasClass('octicon-chevron-left')) {
-            updateImage(false);
+        showImage(index);
+    }
+    else if (caller.hasClass('octicon-chevron-right')) {
+        index++;
+        if (index == imageCount) {
+            index = 0;
         }
-        // working on this part
-        else if (e.target.id == 1) {
-            exhibition = "2014";
-			index = 0;
-            render();
-        }
-        else if (e.target.id == 2) {
-            exhibition = "2010";
-			index = 0;
-            render();
-        }
-        else {
-            updateImage(true);
-        }
+        showImage(index);
+    }
+    else if (e.target.id == 1) {
+        exhibition = "2014";
+        index = 0;
+        render();
+    }
+    else if (e.target.id == 2) {
+        exhibition = "2010";
+        index = 0;
+        render();
+    }
 }
 
 /*
@@ -120,14 +123,18 @@ function handleClick(caller, e) {
 
 function handleKeyPress(e) {
     if (e.which == 37) {
-        updateImage(false);
-        showFaded();
-        $(".fadeout").stop();
+        index--;
+        if (index < 0) {
+            index = imageCount - 1;
+        }
+        showImage(index);
     }
     else if (e.which == 39) {
-        updateImage(true);
-        showFaded();
-        $(".fadeout").stop();
+        index++;
+        if (index == imageCount) {
+            index = 0;
+        }
+        showImage(index);
     }
 }
 
@@ -136,61 +143,41 @@ function handleKeyPress(e) {
     Appends images to the webpage
 */
 
-function addImages() {
-    var images          = $("#images");
-    var largestWidth    = 0;
-    var largestHeight   = 0;
-   
-    // Reinitialize image references
-    images.empty();
+function getImagedata() {
     imageCount  = 0;
     imageList   = [];
 
-
     for (i = 0; i < imageData["paths"].length; i++) {
         if (imageData["exhibitions"][i] == exhibition) {
-            images.append('<img src="' + imageData["paths"][i] + '" />');
+            var imagetag = '<img src="' + imageData["paths"][i] + '" />';
+            var anchor = '<a href="' + imageData["paths"][i] + '" data-lightbox="image-' + i
+                +  '">' + imagetag + '</a>';
             imageCount++;
-            if (imageData["widths"][i] > largestWidth) {
-                largestWidth = imageData["widths"][i];
-            }
-            if (imageData["heights"][i] > largestHeight) {
-                largestHeight = imageData["heights"][i];
-            }
+            imageList.push(anchor);
         }
     }
-    images.css({
-        "width" : largestWidth,
-        "height" : largestHeight
-    });
-    images.children().css({
-        "position" : "absolute",
-        "top" : 0,
-        "left" : 0,
-        "opacity" : 0
-    });
-    $.each(images.children("img"), function(key, value) {
-        imageList.push(value);
-    });
 }
-
 /* Displays an image with index index  */
 
 function showImage(index) {
     var image = imageList[index];
-    $(image).animate({"opacity" : 1}, 500);
-    $("#imageWrapper").css({
-        "height": imageData["heights"][index],
-        "width": imageData["widths"][index],
-    });
+    var imagetag = $("#image");
+    var imagetag2 = $("#image2");
+    var delay = 1000;
+    imagetag2.css({opacity : 0});
+    imagetag2.empty();
+    imagetag2.append(image);
+    imagetag2.animate({opacity : 1}, delay);
+    imagetag.animate({opacity : 0}, delay, function() {
+            imagetag.empty();
+            imagetag.append(image)
+        }).animate({opacity : 1}, delay);
+    renderSidebar();
 }
+
 
 /* Hides an image with index index  */
 
-function hideImage(index) {
-    var image = imageList[index];
-    $(image).animate({"opacity" : 0}, 500);
-}
 
 /* Renders the container next to the image and its contents */
 
@@ -205,31 +192,9 @@ function renderSidebar() {
 }
 
 /*
-    Display a new image. If the boolean flag next is true, display
-    the next image. Else, display the previous image.
-*/
-
-function updateImage(next) {
-	if (imageCount >= 2) {
-		hideImage(index);
-		if (next) {
-			index < imageCount - 1 ? index++ : index = 0;
-		}
-		else {
-			index > 0 ? index-- : index = imageCount - 1;
-		}
-		showImage(index);
-		renderSidebar(index);
-	}
-}
-
-/*
     Attempts to fade out elements that is a member of class "fadeout"
 */
 
-function fadeout() {
-    $(".fadeout").animate({"opacity" : 0}, 1500);
-}
 
 /*
     Shows faded out elements
