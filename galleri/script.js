@@ -61,17 +61,17 @@ $(document).ready(function() {
             render();
             
             // Handle events
-
-            $('.clickable').on('click', function(e) { 
-                handleClick($(this), e)
-            });
+			$('.clickable').on('click', function(e) { 
+				handleclick($(this), e)
+			});
             $(document).on("keydown", function(e) { handleKeyPress(e) });
+
+
 
         },
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
-
 
 
 function render() {
@@ -87,37 +87,103 @@ function render() {
     }
 }
 
+
+
+/*
+    Appends images to the webpage
+*/
+
+function getImagedata() {
+    imageCount  = 0;
+    for (i = 0; i < imageData["paths"].length; i++) {
+        if (imageData["exhibitions"][i] == exhibition) {
+			var imagetag = '<img data-lightbox="image1" src="' + 
+							imageData["paths"][i] + '" />';
+			var imageLink = '<a href="' + imageData["paths"][i] + 
+							'" data-lightbox="image1">' + imagetag + '</a>';
+            imageCount++;
+            imageList.push(imageLink);
+        }
+    }
+}
+
+/* Displays an image with index index  */
+
+function addImages() {
+	for (i = 0; i < imageList.length; i++) {
+		$("#crossfade").append(imageList[i]);
+	}
+	$("#crossfade a:first-child").addClass("opaque");
+}
+
+function showImage() {
+	$("#crossfade a").removeClass("opaque");
+	$("#crossfade a").css('z-index', 0);
+	var newImage = $("#crossfade a:nth-child(" + (index + 1) + ")");
+	newImage.css('z-index', 1);
+	newImage.addClass("opaque");
+	updateSidebar();
+}
+
+
+function render() {
+    getImagedata();
+	addImages();
+	showImage();
+    updateSidebar();
+    screenheight = screen.height;
+    if ($(window).height() > 1000) {
+        $("#container").css("height", $(window).height());
+    }
+    else {
+        $("#container").css("height", 1000);
+    }
+}
+
+/* Renders the container next to the image and its contents */
+
+function updateSidebar() {
+    $("#control").css("height", imageData["heights"][index]);
+    var desc        = $("#description");
+    var whichimage  = $("#whichimage");
+    desc.empty();
+    desc.append(imageData["descs"][index]);
+    whichimage.empty();
+    whichimage.append((index + 1) + "/" + imageCount);
+}
+
 /*
     Handles the event when an element is clicked 
 */
 
-function handleClick(caller, e) {
-    if (caller.hasClass('octicon-chevron-left')) {
-        index--;
-        if (index < 0) {
-            index = imageCount - 1;
-        }
-        showImage(index);
-        renderSidebar(index);
-    }
-    else if (caller.hasClass('octicon-chevron-right')) {
-        index++;
-        if (index == imageCount) {
-            index = 0;
-        }
-        showImage(index);
-        renderSidebar(index);
-    }
-    else if (e.target.id == 1) {
-        exhibition = "2014";
-        index = 0;
-        render();
-    }
-    else if (e.target.id == 2) {
-        exhibition = "2010";
-        index = 0;
-        render();
-    }
+function handleclick(caller, e) {
+	if (caller.hasClass('octicon-chevron-left')) {
+		index--;
+		if (index < 0) {
+			index = imageCount - 1;
+		}
+		showImage();
+	}
+	else if (caller.hasClass('octicon-chevron-right')) {
+		index++;
+		if (index == imageCount) {
+			index = 0;
+		}
+		showImage();
+	}
+	else if (e.target.id == 1) {
+		exhibition = "2014";
+		index = 0;
+		render();
+	}
+	else if (e.target.id == 2) {
+		exhibition = "2010";
+		index = 0;
+		render();
+	}
+	else if (caller.is($("#crossfade a"))) {
+		//something else 
+	}
 }
 
 /*
@@ -130,62 +196,14 @@ function handleKeyPress(e) {
         if (index < 0) {
             index = imageCount - 1;
         }
-        showImage(index);
-        renderSidebar(index);
+        showImage();
     }
     else if (e.which == 39) {
         index++;
         if (index == imageCount) {
             index = 0;
         }
-        showImage(index);
-        renderSidebar(index);
+        showImage();
     }
-}
-
-
-/*
-    Appends images to the webpage
-*/
-
-function getImagedata() {
-    imageCount  = 0;
-    for (i = 0; i < imageData["paths"].length; i++) {
-        if (imageData["exhibitions"][i] == exhibition) {
-            var imagetag = '<img src="' + imageData["paths"][i] + '" />';
-            imageCount++;
-        }
-    }
-}
-
-/* Displays an image with index index  */
-
-function showImage(index) {
-    var delay = 500;
-    var oldImage = $("#fadeContainer img");
-    var image = new Image();
-    image.src = imageData["paths"][index];
-    var newimage = $(image).hide();
-    $("#fadeContainer").append(image);
-    oldImage.stop(true).fadeOut(delay, function() {
-        $(this).remove();
-    });
-    newimage.fadeIn(delay);
-}
-
-
-/* Hides an image with index index  */
-
-
-/* Renders the container next to the image and its contents */
-
-function renderSidebar() {
-    $("#control").css("height", imageData["heights"][index]);
-    var desc        = $("#description");
-    var whichimage  = $("#whichimage");
-    desc.empty();
-    desc.append(imageData["descs"][index]);
-    whichimage.empty();
-    whichimage.append((index + 1) + "/" + imageCount);
 }
 

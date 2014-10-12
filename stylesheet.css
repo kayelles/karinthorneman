@@ -52,20 +52,29 @@ body {
     border-right        : 1px solid #bebebe; 
     border-bottom       : 1px solid #bebebe; 
 
-    background-color: #ffffff;
+    background-color: #eeeeee;
 }
 
-#logo > img {
-    width : 26%;
-    height: auto;
-    left : 100px;
-    top: 50px;
-    position: relative;
-}
 
 #header {
     height: 200px;
     border-bottom   : 1px solid #bebebe;
+}
+
+#logo {
+    margin-top : 50px;
+    width : 400px;
+    height : 100px;
+	left: 50px;
+    text-align: left;
+    color : #666666;
+	opacity: 0.8;
+	position: relative;
+}
+
+#logo img {
+	width : 300px;
+	height : auto;
 }
 
 #menu {
@@ -84,7 +93,6 @@ body {
     margin-bottom   : 0px;
     margin-top      : 0px;
     margin-left     : 0px;
-    margin-right    : 50px;
 }
 
 #menu li {
@@ -93,7 +101,17 @@ body {
     margin-bottom   : 10px;
     margin-left     : 0px;
     margin-right    : 0px;
-    width           : 80px;
+    width           : 100px;
+}
+
+#menu li img {
+	width : 100px;
+	height : auto;
+	opacity : 0.5;
+}
+
+#menu li img:hover {
+	opacity : 1;
 }
 
 a:hover {

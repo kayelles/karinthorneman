@@ -1,14 +1,32 @@
-#togglefade {
-    cursor : pointer;
-    text-align: center;
-    position : absolute;
-    border : 1px solid #6e6e6e;
-    background-color: #ffffff;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    width : 100px;
-    height : 50px;
-    margin-top: 50px;
+#contentHolder {
+}
+
+#crossfade {
+	position: relative;
+	left : 100px;
+}
+
+#crossfade a {
+	position: absolute;
+	left : 0:
+	-webkit-transition: opacity 0.5s ease-in-out;
+	-moz-transition: opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
+	-transition: opacity 0.5s ease-in-out;
+	opacity : 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+}
+
+img {
+	width: 500px;
+	height: auto;
+}
+
+#crossfade a.opaque {
+	opacity: 1;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=1);
 }
 
 #control {
@@ -18,19 +36,6 @@
     float   : left;
     margin-bottom : 50px;
 }
-
-#fadeContainer img {
-    position : absolute;
-    top: 0px;
-    left: 200px;
-}
-
-#images img {
-    position : absolute;
-    top: 0px;
-    left: 200px;
-}
-
 
 #exhibitions {
     position : relative;
@@ -48,7 +53,6 @@
 }
 
 #exhibitions > li:hover {
-    cursor : pointer;
     color: #df7401;
 }
 
@@ -82,9 +86,12 @@
     opacity : 0.2;
 }
 
+.clickable {
+	cursor:pointer;
+}
+
 .mega-octicon:hover {
     opacity : 1;
-    cursor : pointer;
 }
 
 #whichimage {
