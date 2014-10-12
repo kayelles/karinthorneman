@@ -7,7 +7,7 @@
 *	[ ] Fix the front page 													 * 
 *	[ ] Fix the bug with remove 											 * 
 *	[x] make images able to pop out 										 * 
-*	[ ] fix gallery page (limit clicks, make pop out image bigger)           *
+*	[ ] cache images into memory when page is loaded                         *
 *	[ ] Add error checking for file and user input							 * 
 *	[ ] Add functionality for updating description and text fields  		 * 
 *	[ ] Fix bug with description not corresponding to correct image 		 * 
@@ -22,7 +22,6 @@
 
 var index = 0;
 var imageCount = 0;
-var imageList = [];
 var exhibition = "2014";
 var screenheight = 0;
 
@@ -58,6 +57,7 @@ $(document).ready(function() {
 
             // Initialize rendering
 
+
             render();
             
             // Handle events
@@ -71,6 +71,7 @@ $(document).ready(function() {
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
 });
+
 
 
 function render() {
@@ -97,6 +98,7 @@ function handleClick(caller, e) {
             index = imageCount - 1;
         }
         showImage(index);
+        renderSidebar(index);
     }
     else if (caller.hasClass('octicon-chevron-right')) {
         index++;
@@ -104,6 +106,7 @@ function handleClick(caller, e) {
             index = 0;
         }
         showImage(index);
+        renderSidebar(index);
     }
     else if (e.target.id == 1) {
         exhibition = "2014";
@@ -128,6 +131,7 @@ function handleKeyPress(e) {
             index = imageCount - 1;
         }
         showImage(index);
+        renderSidebar(index);
     }
     else if (e.which == 39) {
         index++;
@@ -135,6 +139,7 @@ function handleKeyPress(e) {
             index = 0;
         }
         showImage(index);
+        renderSidebar(index);
     }
 }
 
@@ -145,34 +150,27 @@ function handleKeyPress(e) {
 
 function getImagedata() {
     imageCount  = 0;
-    imageList   = [];
-
     for (i = 0; i < imageData["paths"].length; i++) {
         if (imageData["exhibitions"][i] == exhibition) {
             var imagetag = '<img src="' + imageData["paths"][i] + '" />';
-            var anchor = '<a href="' + imageData["paths"][i] + '" data-lightbox="image-' + i
-                +  '">' + imagetag + '</a>';
             imageCount++;
-            imageList.push(anchor);
         }
     }
 }
+
 /* Displays an image with index index  */
 
 function showImage(index) {
-    var image = imageList[index];
-    var imagetag = $("#image");
-    var imagetag2 = $("#image2");
-    var delay = 1000;
-    imagetag2.css({opacity : 0});
-    imagetag2.empty();
-    imagetag2.append(image);
-    imagetag2.animate({opacity : 1}, delay);
-    imagetag.animate({opacity : 0}, delay, function() {
-            imagetag.empty();
-            imagetag.append(image)
-        }).animate({opacity : 1}, delay);
-    renderSidebar();
+    var delay = 500;
+    var oldImage = $("#fadeContainer img");
+    var image = new Image();
+    image.src = imageData["paths"][index];
+    var newimage = $(image).hide();
+    $("#fadeContainer").append(image);
+    oldImage.stop(true).fadeOut(delay, function() {
+        $(this).remove();
+    });
+    newimage.fadeIn(delay);
 }
 
 
@@ -189,25 +187,5 @@ function renderSidebar() {
     desc.append(imageData["descs"][index]);
     whichimage.empty();
     whichimage.append((index + 1) + "/" + imageCount);
-}
-
-/*
-    Attempts to fade out elements that is a member of class "fadeout"
-*/
-
-
-/*
-    Shows faded out elements
-*/
-
-function showFaded() {
-    $('.fadeout').css('opacity' , 1); 
-    $('.mega-octicon').css('opacity', 0.2);
-    $('.mega-octicon').mouseenter(function() {
-        $(this).css('opacity', 1);
-    });
-    $('.mega-octicon').mouseleave(function() {
-        $(this).css('opacity', 0.2);
-    });
 }
 

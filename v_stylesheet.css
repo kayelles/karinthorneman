@@ -1,16 +1,18 @@
 
-#imagewrapper {
+#container {
     height: 800px;
+    background-size: 80%;
+    background-image: url("images/bakrunder-och-logo/bakrund3.jpg");
 }
 
-img {
-    margin-top  : 50px;
-    position    : absolute;
-    width       : 500px;
-    height      : auto;
-    left        : 50%;
-    margin-left : -250px;
-}
+/*img {*/
+    /*margin-top  : 50px;*/
+    /*position    : absolute;*/
+    /*width       : 500px;*/
+    /*height      : auto;*/
+    /*left        : 50%;*/
+    /*margin-left : -250px;*/
+/*}*/
 
 img:hover {
     cursor: pointer;

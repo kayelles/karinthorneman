@@ -19,13 +19,13 @@
     margin-bottom : 50px;
 }
 
-#image {
+#fadeContainer img {
     position : absolute;
     top: 0px;
     left: 200px;
 }
 
-#image2 {
+#images img {
     position : absolute;
     top: 0px;
     left: 200px;
