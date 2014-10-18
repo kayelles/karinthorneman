@@ -38,7 +38,6 @@ img {
 }
 
 #exhibitions {
-	top				: 50px;
     position 		: relative;
     list-style-type : none;
     width 			: inherit;
@@ -57,35 +56,33 @@ img {
 }
 
 #exhibitions > li:hover {
-	background-color: #f0f0f0;
+	background-color: #d7e0ff;
     color   : #800000;
 }
 
 #exhibitions > li.focused {
-	background-color: #f0f0f0;
+	background-color: #d7e0ff;
     color   : #800000;
 }
 
 #arrowHolder {  
-	border			: 1px solid white;
-	border-radius	: 10px;
-	top				: 50px;
+	border-top		: 1px solid #bebebe;
+	border-bottom	: 1px solid #bebebe;
+	top				: 25px;
     width           : inherit;
     position        : relative;
-    padding-top     : 10px;
-    padding-bottom  : 10px;
-    margin-top      : 25px;
-    margin-bottom   : 25px;
-	background-color: #f0f0f0;
 	color: #666666;
 }
 
 #arrowHolder:hover {  
+	border-color: #800000;
 	color: #800000;
 }
 
 #arrowHolder > span {
+	margin-top: 10px;
     left : 25px;
+	margin-bottom: 10px;
 }
 
 #description {
@@ -105,7 +102,7 @@ img {
 
 .mega-octicon {
     position : relative;
-    opacity : 0.2;
+	opacity : 0.2;
 }
 
 .clickable {

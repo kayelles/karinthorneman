@@ -1,18 +1,37 @@
+
 #upper {
-    padding-bottom: 50px;
+	position: relative;
+	height: 350px;
+	width: 900px;
 }
 
 #lower {
-    padding-top : 50px;
+	position: relative;
+	padding-top : 50px;
     border-top : 1px solid #bebebe;
+	height: 500px;
+	width: 900px;
 }
+
 #about {
-    width : 300px;
+	width 	: 400px;
+	height 	: 250px;
+	padding	: 25px;
+	border 	: 1px solid white;
+	background-color: #d7e0ff;
+	border-radius: 10px;
+	float: left;	
 }
 
 #exhib {
-    position : absolute;
-    width : 400px;
+	width : 400px;
+	height: 250px;
+	padding		: 25px;
+	border : 1px solid white;
+	border-radius: 10px;
+	background-color: #d7e0ff;
+    position : relative;
+	float: left;
 }
 
 #exhib li {
@@ -22,10 +41,14 @@
 }
 
 #contactinfo {
+	margin-right: 100px;
+	float: right;
+	width : 200px;
+	height: 250px;
+	padding		: 25px;
+	border : 1px solid white;
+	border-radius: 10px;
+	background-color: #d7e0ff;
     position : relative;
-    left : 400px;
-    top : 0px;
-    width : 400px;
 }
-
 

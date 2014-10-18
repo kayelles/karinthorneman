@@ -1,5 +1,4 @@
 #contentHolder {
-    padding-top : 50px;
     height : 500px;
 }
 
@@ -7,23 +6,24 @@
     width : 300px;
 	border : 1px solid white;
 	border-radius: 10px;
-	background-color: #f0f0f0;
-	padding: 25px;
+	background-color: #d7e0ff;
+	padding		: 25px;
+	float		:left;
 }
 
 #image {
+	float	:right;
+	width : 500px;
     height : auto;
-    position : absolute;
     right : 0px;
-    top : 50px;
+    top : 0px;
 }
 
 #description {
     height : auto;
     position : absolute;
-    right : 450px;
-    margin-top : -30px;
-    padding : 5px;
+    left : 850px;
+	top: 420px;
     font-style: italic;
 }
 

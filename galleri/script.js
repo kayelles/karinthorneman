@@ -109,6 +109,8 @@ function showImage() {
 	newImage.css('z-index', 1);
 	newImage.addClass("opaque");
 	updateSidebar();
+	//TODO
+	$("#container").css("height", imageData["heights"][index] + 475);
 }
 
 
@@ -119,12 +121,6 @@ function render() {
     updateSidebar();
     screenheight = screen.height;
 	$("#exh2014").addClass("focused");
-    if ($(window).height() > 1000) {
-        $("#container").css("height", $(window).height());
-    }
-    else {
-        $("#container").css("height", 1000);
-    }
 }
 
 /* Renders the container next to the image and its contents */
