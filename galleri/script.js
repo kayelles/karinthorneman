@@ -24,6 +24,7 @@ var index = 0;
 var imageCount = 0;
 var exhibition = "2014";
 var screenheight = 0;
+var imageList = [];
 
 /*	The object that is to be loaded with server data*/
 
@@ -74,21 +75,6 @@ $(document).ready(function() {
 });
 
 
-function render() {
-    getImagedata();
-    showImage(index);
-    renderSidebar(index);
-    screenheight = screen.height;
-    if ($(window).height() > 1000) {
-        $("#container").css("height", $(window).height());
-    }
-    else {
-        $("#container").css("height", 1000);
-    }
-}
-
-
-
 /*
     Appends images to the webpage
 */
@@ -132,6 +118,7 @@ function render() {
 	showImage();
     updateSidebar();
     screenheight = screen.height;
+	$("#exh2014").addClass("focused");
     if ($(window).height() > 1000) {
         $("#container").css("height", $(window).height());
     }
@@ -143,13 +130,16 @@ function render() {
 /* Renders the container next to the image and its contents */
 
 function updateSidebar() {
-    $("#control").css("height", imageData["heights"][index]);
-    var desc        = $("#description");
-    var whichimage  = $("#whichimage");
-    desc.empty();
-    desc.append(imageData["descs"][index]);
-    whichimage.empty();
-    whichimage.append((index + 1) + "/" + imageCount);
+	var imagewidth = imageData["widths"][index];
+	var scaleRatio = 500 / imagewidth;
+	var scaledHeight = imageData["heights"][index] * scaleRatio;
+    $("#control").css("height", scaledHeight);
+    $("#contentHolder").css("height", scaledHeight + 100);
+    $("#description").css("top", scaledHeight - 100);
+    $("#description").empty();
+    $("#description").append(imageData["descs"][index]);
+    $("#whichimage").empty();
+    $("#whichimage").append((index + 1) + "/" + imageCount);
 }
 
 /*

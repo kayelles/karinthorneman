@@ -67,7 +67,7 @@ try {
     addImage(   "../../../data/imagedata.json", 
                 $_POST['exhib'],
                 $filesrc_rel_datadir, 
-                $_POST['description'],
+                "<p>" . $_POST['description'] . "</p>",
                 $width,
                 $height );
 
