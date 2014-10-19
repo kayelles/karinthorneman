@@ -1,3 +1,4 @@
+
 @font-face {
     font-family : 'sspl';
     src         : url('fonts/ssp/SourceSansPro-Light.otf') format('OpenType');
@@ -106,15 +107,9 @@ body {
 	opacity : 1;
 }
 
-a {
-    text-decoration : none;
-    color : #666666;
-}
-
 #contentHolder {
     position		: relative;
     font-size		: 14px;
-	height			: 400px;
 	margin-bottom	: 100px;
 	margin-left		: 50px;
 	margin-right	: 50px;
@@ -136,3 +131,7 @@ a {
 	left: 50px;
 }
 
+a {
+	color: #666666;
+	text-decoration: none;
+}

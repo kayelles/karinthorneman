@@ -110,7 +110,6 @@ function showImage() {
 	newImage.addClass("opaque");
 	updateSidebar();
 	//TODO
-	$("#container").css("height", imageData["heights"][index] + 600);
 }
 
 
@@ -127,13 +126,13 @@ function render() {
 
 function updateSidebar() {
 	var imagewidth = imageData["widths"][index];
-	var scaleRatio = 500 / imagewidth;
+	var scaleRatio = 600 / imagewidth;
 	var scaledHeight = imageData["heights"][index] * scaleRatio;
-    $("#control").css("height", scaledHeight);
-    $("#contentHolder").css("height", scaledHeight + 100);
-    $("#description").css("top", scaledHeight - 100);
+	$("#container").css("height", scaledHeight + 700);
+    $("#contentHolder").css("height", scaledHeight + 200);
     $("#description").empty();
     $("#description").append(imageData["descs"][index]);
+    $("#description").css("top", scaledHeight + 100);
     $("#whichimage").empty();
     $("#whichimage").append((index + 1) + "/" + imageCount);
 }

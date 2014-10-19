@@ -4,8 +4,9 @@
 }
 
 #crossfade a {
+	width: 600px;
+	left : 0;
 	position: absolute;
-	left : 0:
 	-webkit-transition: opacity 0.5s ease-in-out;
 	-moz-transition: opacity 0.5s ease-in-out;
 	-o-transition: opacity 0.5s ease-in-out;
@@ -15,8 +16,9 @@
 	filter: alpha(opacity=0);
 }
 
-img {
-	width: 500px;
+#crossfade img {
+	margin-left: 150px;
+	width: 600px;
 	height: auto;
 }
 
@@ -40,7 +42,6 @@ img {
     position: relative;
     width   : 150px;
     height  : 300px;
-    float   : left;
     margin-bottom : 50px;
 	margin-right	: 50px;
 }
@@ -79,7 +80,9 @@ img {
 }
 
 #arrowHolder {  
-    width           : 200px;
+	margin-left		: 150px;
+	margin-bottom	: 10px;
+    width           : 600px;
     position        : relative;
 	color: #666666;
 }
@@ -89,24 +92,22 @@ img {
 	color: #800000;
 }
 
-#arrowHolder > span {
-    left : 50px;
-	margin-bottom: 10px;
-}
 
 #description {
-    position 		: relative;
-	text-align 		: center;
-	float: right;
-	height: 100px;
-	width: 200px;
+	margin-left : 150px;
+	position	: absolute;
+	text-align 	: center;
+	width		: 600px;
 }
 
 #description > p {
 	margin: 25px;
 }
 
-
+.octicon-chevron-right {
+	position: relative;
+	left: 540px;
+}
 .mega-octicon {
     position : relative;
 	opacity : 0.2;
@@ -123,10 +124,8 @@ img {
 
 #whichimage {
     position : relative;
-    top : -5px;
-    margin-left : 20px;
-    margin-right : 20px;
+	left: 270px;
+    bottom : 5px;
 }
-
 
 
