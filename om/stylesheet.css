@@ -1,7 +1,10 @@
+#contentHolder {
+	margin-top: 100px;
+}
 
 #upper {
 	position: relative;
-	height: 350px;
+	height: 425px;
 	width: 900px;
 }
 
@@ -13,17 +16,28 @@
 	width: 900px;
 }
 
-#about {
+#text {
+	margin-left: 50px;
 	width 	: 400px;
-	height 	: 250px;
+	height 	: 315px;
 	padding	: 25px;
 	border 	: 1px solid white;
 	background-color: #d7e0ff;
 	border-radius: 10px;
 	float: left;	
 }
+#image {
+	position: relative;
+	float: right;
+	margin-right : 50px;
+}
+
+#image > img {
+	width : 300px;
+}
 
 #exhib {
+	margin-left: 50px;
 	width : 400px;
 	height: 250px;
 	padding		: 25px;
@@ -41,7 +55,7 @@
 }
 
 #contactinfo {
-	margin-right: 100px;
+	margin-right: 50px;
 	float: right;
 	width : 200px;
 	height: 250px;

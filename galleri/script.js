@@ -110,7 +110,7 @@ function showImage() {
 	newImage.addClass("opaque");
 	updateSidebar();
 	//TODO
-	$("#container").css("height", imageData["heights"][index] + 475);
+	$("#container").css("height", imageData["heights"][index] + 600);
 }
 
 
