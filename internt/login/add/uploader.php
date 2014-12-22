@@ -63,7 +63,6 @@ try {
     $size = getimagesize($filesrc_rel_uploaddir);
     $width = $size[0];
     $height = $size[1];
-
     addImage(   "../../../data/imagedata.json", 
                 $_POST['exhib'],
                 $filesrc_rel_datadir, 
@@ -89,15 +88,13 @@ function addImage(  $filepath,
     if (file_exists($filepath)) {
         $input = file_get_contents($filepath);
         $data_array = json_decode($input);
-
-        if ($data_array == null) {
+		if ($data_array == null or $data_array == true or $data_array == false) {
             $data_array = [];
-        }
+		}
        
         //Block that calculates the id of the uploaded image
 
         $largestID = 0;
-
         for ($i = 0; $i < count($data_array); $i++) {
             $image = $data_array[$i];
             $image_properties = get_object_vars($image);
