@@ -50,7 +50,12 @@ $(document).ready(function() {
 
 function render() {
 	getImagedata();
-	addImages();
+	if (imageCount <= 0) { 
+		$("#infoarea").append("<p>Inga bilder att visa</p>");
+	} 
+	else {
+		addImages();
+	}
 }
 
 /*
@@ -73,6 +78,15 @@ function addImages() {
 	for (i = 0; i < imageList.length; i++) {
 		$("#images").append(imageList[i]);
 	}
+	updateScreenSize();
+}
+
+function updateScreenSize() {
+	rows = Math.floor(imageCount / 4);
+	console.log(rows);
+	if (rows >= 4) {
+		$("#container").css("height", 1225 + ((rows - 3) * 300));
+	}
 }
 
 function getIDFromPath(path) {
@@ -84,8 +98,7 @@ function getIDFromPath(path) {
 }
 
 function handleclick(caller, e) {
-	ans = window.confirm("är du sáker?");
-	if (ans) {
+	if (window.confirm("är du säker?")) {
 		image_path = caller.attr("src");
 		image_id = getIDFromPath(image_path);
 		console.log(image_id);

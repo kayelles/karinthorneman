@@ -88,35 +88,32 @@ function addImage(  $filepath,
     if (file_exists($filepath)) {
         $input = file_get_contents($filepath);
         $data_array = json_decode($input);
-		if ($data_array == null or $data_array == true or $data_array == false) {
+		if ($data_array == null or $data_array == false) {
             $data_array = [];
 		}
-       
-        //Block that calculates the id of the uploaded image
 
-        $largestID = 0;
-        for ($i = 0; $i < count($data_array); $i++) {
-            $image = $data_array[$i];
-            $image_properties = get_object_vars($image);
-            if (array_key_exists('id', $image_properties)) {
-                if ($image_properties['id'] > $largestID) {
-                    $largestID = $image_properties['id'];
-                }
-            }
-        }
+		$largestID = 0;
+		for ($i = 0; $i < count($data_array); $i++) {
+			$image = $data_array[$i];
+			$image_properties = get_object_vars($image);
+			if (array_key_exists('id', $image_properties)) {
+				if ($image_properties['id'] > $largestID) {
+					$largestID = $image_properties['id'];
+				}
+			}
+		}
 
-        $image = array();
-        $image['id']        = (string)($largestID + 1); 
-        $image['exh']       = $imageexh;
-        $image['src']       = $imagesrc;
-        $image['desc']      = $imagedesc;
-        $image['width']     = $imagewidth;
-        $image['height']    = $imageheight;
-        array_push($data_array, $image);
-        $jsondata = json_encode($data_array);
-        file_put_contents($filepath, $jsondata) 
-            or die("failed to write to file");
-
+		$image = array();
+		$image['id']        = (string)($largestID + 1); 
+		$image['exh']       = $imageexh;
+		$image['src']       = $imagesrc;
+		$image['desc']      = $imagedesc;
+		$image['width']     = $imagewidth;
+		$image['height']    = $imageheight;
+		array_push($data_array, $image);
+		$jsondata = json_encode($data_array);
+		file_put_contents($filepath, $jsondata) 
+			or die("failed to write to file");
     }
     else {
         echo 'Error while loading from file: ' . $filepath;

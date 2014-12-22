@@ -32,11 +32,12 @@
             <div id="header">
 				<h2>Ta bort bilder</h2>
 				<p>Tryck på den bild du vill ta bort</p>
+			<form action="../index.php">
+				<input type="submit" value="Tillbaka" />
+			</form>
             </div>
-        
-			<div id="images">
-			</div>
-
+			<div id="infoarea"></div>        
+			<div id="images"></div>
         </div>
         <script language = "javascript" 
                 src = "../../../scripts/js/jquery-1.11.1.min.js">

@@ -13,7 +13,8 @@
             }
 
         ?>
-        <h3>Välj en bild att ladda upp</h3>
+		<h2>Ta bort bilder</h2>
+        <p>Välj en bild att ladda upp</p>
         <form   enctype="multipart/form-data" 
                 action="uploader.php" 
                 method="post">
@@ -39,12 +40,6 @@
             <input  type="submit" 
                     value="Ladda upp" />
         </form>
-        <?php
-            if (isset($_SESSION['upload_message'])) {
-                echo $_SESSION['upload_message'];
-                unset($_SESSION['upload_message']);
-            }
-        ?>
         <form action="../index.php">
             <input type="submit" value="Tillbaka" />
         </form>

@@ -1,5 +1,5 @@
-
 img {
+	padding-top: 25px;
 	padding-left: 25px;
 	width: 200px;
 	height: auto;
@@ -13,5 +13,9 @@ img:hover {
 	padding-top: 25px;
     position : relative;
 	left: 50px;
+}
+
+#container {
+	border: 1px solid red;
 }
 

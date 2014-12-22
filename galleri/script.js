@@ -2,30 +2,32 @@
 /* Script for the image gallery page */
 
 /*========================================================================== *
-*	TODO list  														         * 
+*	TODO list                                                                * 
 *                                                                            *
-*	[ ] Fix the front page 													 * 
-*	[ ] Fix remove 											 * 
-*	[x] make images able to pop out 										 * 
+*   [ ] add functionality for adding more categories                         *
+*	[x] Fix the front page (remove it                                        *
+*	[ ] Fix 'safe' password                                                  * 
+*   [ ] Fix screenheight                                                     *	
+*   [ ] test add and remove for different types of images                    *
+*	[x] Fix remove                                                           * 
+*	[x] make images able to pop out                                          * 
 *	[x] cache images into memory when page is loaded                         *
-*	[ ] Add error checking for file and user input							 * 
-*	[ ] Add functionality for updating description and text fields  		 * 
-*	[x] Fix bug with description not corresponding to correct image 		 * 
+*	[ ] Add error checking for file and user input                           * 
+*	[ ] Add functionality for updating description and text fields           * 
+*	[x] Fix bug with description not corresponding to correct image          * 
 *                                                                            *
 /*===========================================================================*/ 
 
-
 // global variables
-
-/*  Idea, add an active class to clickable elements and remove / add it before after
- *  finishing animating. Check for it before starting animation */ 
-
 var index = 0;
 var imageCount = 0;
 var exhibition = "2014";
 var json_data;
-var screenheight = 0;
+
+/*	Dynamic array holding the image captions */
 var descList = [];
+
+/*	The object that is to be loaded with server data*/
 var imageData = {
 	"exhibitions"   : [],
 	"paths"         : [],
@@ -33,8 +35,6 @@ var imageData = {
 	"widths"        : [],
 	"heights"       : []
 };
-
-/*	The object that is to be loaded with server data*/
 
 
 /*	Main script
@@ -133,8 +133,7 @@ function updateImageInfo() {
 
     $("#description").empty();
     $("#description").append(descList[index]);
-
-	$("#container").css("height", scaledHeight + 700);
+	$("#container").css("height", 1400);
     $("#contentHolder").css("height", scaledHeight + 200);
     $("#description").css("top", scaledHeight + 100);
     $("#whichimage").empty();
@@ -156,7 +155,6 @@ function render() {
 	loadImageData();
     addImages();
 	showImage();
-    screenheight = screen.height;
 }
 
 /*
