@@ -33,6 +33,7 @@ body {
     font-style      : normal;
     text-align      : left;
     height          : auto;
+	background-color: #e0e0e0;
 }
 
 #container {
@@ -43,6 +44,7 @@ body {
     top                 : 0px;
     left                : 50%;
     margin-left         : -500px;
+	background-color 	: #ffffff;
 }
 
 #header {

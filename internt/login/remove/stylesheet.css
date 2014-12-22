@@ -1,86 +1,17 @@
 
-#control {
-    font-size : 15px;
-    position: relative;
-    width   : 150px;
-    float   : left;
-    margin-bottom : 50px;
+img {
+	padding-left: 25px;
+	width: 200px;
+	height: auto;
+}
+
+img:hover {
+	cursor: pointer;
 }
 
 #images {
+	padding-top: 25px;
     position : relative;
-    left : 250px;
+	left: 50px;
 }
-
-#imageWrapper {
-    cursor: pointer;
-    z-index: 10;
-}
-
-#exhibitions {
-    position : relative;
-    list-style-type : none;
-    width : inherit;
-    padding-left : 0;
-    margin: 0;
-    text-align : center;
-}
-
-#exhibitions > li {
-    padding-bottom  : 10px;
-    padding-top     : 10px;
-    color           : #666666;
-}
-
-#exhibitions > li:hover {
-    cursor : pointer;
-    color: #df7401;
-}
-
-
-#arrowHolder {  
-    width           : inherit;
-    position        : relative;
-    height          : auto;
-    border-top      : 1px solid #bebebe;
-    border-bottom   : 1px solid #bebebe;
-    padding-top     : 10px;
-    padding-bottom  : 10px;
-    margin-top      : 25px;
-    margin-bottom   : 25px;
-}
-
-#arrowHolder > span {
-    left : 25px;
-}
-
-.mega-octicon {
-    position : relative;
-    opacity : 0.2;
-}
-
-.mega-octicon:hover {
-    opacity : 1;
-    cursor : pointer;
-}
-
-#whichimage {
-    position : relative;
-    top : -5px;
-    margin-left : 20px;
-    margin-right : 20px;
-}
-
-#remover {
-    cursor: pointer;
-}
-
-#header {
-    padding-left: 50px;
-}
-
-#back {
-    margin-top: 50px;
-}
-
 

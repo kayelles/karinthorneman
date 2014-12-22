@@ -30,36 +30,12 @@
         </noscript>
         <div id = "container"> 
             <div id="header">
-                <h2>Ta bort bilder</h2>
-                <p>Bläddra till den bild du vill ta bort och klicka på krysset eller tryck
-                på returtangenten</p>
+				<h2>Ta bort bilder</h2>
+				<p>Tryck på den bild du vill ta bort</p>
             </div>
         
-            <div id="contentHolder">
-                <div id="control">
-                    <ul id="exhibitions">
-                        <li id="1" class="clickable">Utställning 2014</li>
-                        <li id="2" class="clickable">Utställning 2010</li>
-                    </ul>
-                    <div id="arrowHolder" class="holder">
-                        <span class="mega-octicon octicon-chevron-left 
-                                        clickable">
-                        </span>
-                        <span id="whichimage" class="fadeout"></span>
-                        <span class="mega-octicon octicon-chevron-right 
-                                        clickable">
-                        </span>
-                    </div>
-                    <div id="remover" class="mega-octicon octicon-x clickable"></div>
-                    </br>
-                    <form id="back" method="get" action="../index.php">
-                        <input type="submit" value="tillbaka" />
-                    </form>
-                </div>
-                <div id="images">
-                    <div id="imageWrapper" class="clickable"></div>
-                </div>
-            </div>
+			<div id="images">
+			</div>
 
         </div>
         <script language = "javascript" 

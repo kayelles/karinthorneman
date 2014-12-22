@@ -3,11 +3,15 @@
     $data_filepath = "../../../data/imagedata.json";
     $image_filepath = $_POST['path'];
     $image_id = intval($_POST['id']);
-    
+   	
     // Remove the file from uploads
-    unlink($image_filepath) or die("Could not delete the image");
+	if (is_file($image_filepath) and file_exists($image_filepath)) {
+		unlink($image_filepath) or die("Could not delete the image");
+	} 
+	else {
+		die("Not a valid filepath");
+	}
 	
-
     // Remove the files data from the json file
 
     $input = file_get_contents($data_filepath);
@@ -24,7 +28,6 @@
     $jsondata = json_encode($updated_data_array);
 	
     file_put_contents($data_filepath, $jsondata) or die("failed to write to file");
-
     
     function delete_at_id($array, $id) {
         $ret = [];
