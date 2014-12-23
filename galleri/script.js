@@ -4,8 +4,9 @@
 /*========================================================================== *
 *	TODO list                                                                * 
 *                                                                            *
-*   [ ] add functionality for adding more categories                         *
+*   [x] add functionality for adding more categories                         *
 *	[x] Fix the front page (remove it                                        *
+*	[ ] Put category under image in remove pag                               *
 *	[ ] Fix 'safe' password                                                  * 
 *   [ ] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
@@ -15,14 +16,24 @@
 *	[ ] Add error checking for file and user input                           * 
 *	[ ] Add functionality for updating description and text fields           * 
 *	[x] Fix bug with description not corresponding to correct image          * 
-*                                                                            *
+* 	[ ] check for all browsers                                               * 
+*          [ ] Internet Explorer                                             *
+*          [ ] Google chrome                                                 *
+*          [ ] Safari                                                        *
+*   [ ] Check on different monitors                                          *
+*   [ ] check on ipad, iphone                                                *
+*   [ ] meta keyword tags                                                    *
+*   [ ] change text functionality                                            *
 /*===========================================================================*/ 
 
 // global variables
 var index = 0;
 var imageCount = 0;
-var exhibition = "2014";
-var json_data;
+var exhibition;
+
+var image_json, category_json;
+
+var nameIDs = {};
 
 /*	Dynamic array holding the image captions */
 var descList = [];
@@ -36,42 +47,95 @@ var imageData = {
 	"heights"       : []
 };
 
-
+var categoryData = {
+		"names" : []
+};
+	
 /*	Main script
  *
  *	Loads data from server and handles user interaction */ 
 
 $(document).ready(function() {
-    $.ajax({
-        "type" : "post",
-        "url" : "../data/imagedata.json",
-        "success" : function(data) {
-
-			json_data = data;
-
-            // Initialize rendering
-
-			$("#exh2014").addClass("focused");
-			$("#exh2010").removeClass("focused");
-            render();
             
-            // Handle events
+	$.ajax({
+		"type" : "post",
+		"url" : "../data/imagedata.json",
+		"dataType": "json",
+		"success" : function(data) {
+			image_json = data;
+		},
+		"error" : function() { alert("Error: Content could not be loaded"); }
+	});
+
+	$.ajax({
+		"type" : "post",
+		"url" : "../data/categories.json",
+		"dataType": "json",
+		"success" : function(data) {
+			category_json = data;
+			render();
+			// Handle IO events
 			$('.clickable').on('click', function(e) { 
 				handleclick($(this), e)
 			});
-            $(document).on("keydown", function(e) { handleKeyPress(e) });
-
-
-        },
-        "error" : function() { alert("Error: Content could not be loaded"); }
-    });
+			$(document).on("keydown", function(e) { handleKeyPress(e) });
+		},
+		"error" : function() { alert("Error: Content could not be loaded"); }
+	});
+	
 });
 
+/*
+ *	Render the content
+ */
+
+function render() {
+	$("#exhlist").empty();
+	loadCategoryData();
+	addCategories();
+	renderImages();
+}
+
+function renderImages() {
+	$("#crossfade").empty();
+	descList = [];
+	loadImageData();
+	addImages();
+	showImage();
+}
+
 /*	
- *	Read the Json data 
+ *	load the category Json data 
+ */
+
+function loadCategoryData() {
+	categoryData = {
+		"names" : []
+	};
+	for (var i = 0; i < category_json.length; i++) {
+		categoryData["names"].push(category_json[i].name);
+	}
+}
+
+function addCategories() {
+	for (i = 0; i < categoryData["names"].length; i++) {
+		var categoryTag = '<li id="exh' 
+			+ i + '" class="clickable category">' 
+			+ categoryData["names"][i] + '</li>';
+		nameIDs["exh" + i] = categoryData["names"][i];
+		$("#exhlist").append(categoryTag);
+	}
+	//default
+	$("#exh0").addClass("focused");
+	exhibition = nameIDs["exh0"];
+}
+
+/*	
+ *	load the image Json data 
  */
 
 function loadImageData() {
+
 	imageData = {
 		"exhibitions"   : [],
 		"paths"         : [],
@@ -79,13 +143,13 @@ function loadImageData() {
 		"widths"        : [],
 		"heights"       : []
 	};
-	for (var i = 0; i < json_data.length; i++) {
-		if (json_data[i].exh == exhibition) {
-			imageData["exhibitions"].push(json_data[i].exh);
-			imageData["paths"].push(json_data[i].src);
-			imageData["descs"].push(json_data[i].desc);
-			imageData["widths"].push(json_data[i].width);
-			imageData["heights"].push(json_data[i].height);
+	for (var i = 0; i < image_json.length; i++) {
+		if (image_json[i].exh == exhibition) {
+			imageData["exhibitions"].push(image_json[i].exh);
+			imageData["paths"].push(image_json[i].src);
+			imageData["descs"].push(image_json[i].desc);
+			imageData["widths"].push(image_json[i].width);
+			imageData["heights"].push(image_json[i].height);
 		}
 	}
 }
@@ -95,17 +159,16 @@ function loadImageData() {
  */
 
 function addImages() {
-    imageCount  = 0;
-    for (i = 0; i < imageData["paths"].length; i++) {
+	imageCount  = 0;
+	for (i = 0; i < imageData["paths"].length; i++) {
 		var imagetag = '<img data-lightbox="image1" src="' + 
 						imageData["paths"][i] + '" />';
 		var imageLink = '<a href="' + imageData["paths"][i] + 
 						'" data-lightbox="image1">' + imagetag + '</a>';
 		imageCount++;
-		//imageList.push(imageLink);
 		$("#crossfade").append(imageLink);
 		descList.push(imageData["descs"][i]);
-    }
+	}
 	$("#crossfade a:first-child").addClass("opaque");
 }
 
@@ -131,12 +194,12 @@ function updateImageInfo() {
 	var scaleRatio = 600 / imagewidth;
 	var scaledHeight = imageData["heights"][index] * scaleRatio;
 
-    $("#description").empty();
-    $("#description").append(descList[index]);
+	$("#description").empty();
+	$("#description").append(descList[index]);
 	$("#container").css("height", 1400);
-    $("#contentHolder").css("height", scaledHeight + 200);
-    $("#description").css("top", scaledHeight + 100);
-    $("#whichimage").empty();
+	$("#contentHolder").css("height", scaledHeight + 200);
+	$("#description").css("top", scaledHeight + 50);
+	$("#whichimage").empty();
 	if (imageCount > 0) {
 		$("#whichimage").append((index + 1) + "/" + imageCount);
 	} 
@@ -145,17 +208,6 @@ function updateImageInfo() {
 	}
 }
 
-/*
- *	Render the content
- */
-
-function render() {
-	descList = [];
-	$("#crossfade").empty();
-	loadImageData();
-    addImages();
-	showImage();
-}
 
 /*
  *    Handles the event when an element is clicked 
@@ -178,22 +230,16 @@ function handleclick(caller, e) {
 			showImage();
 		}
 	}
-	if (e.target.id == "exh2014") {
-		exhibition = "2014";
-		$("#exh2014").addClass("focused");
-		$("#exh2010").removeClass("focused");
-		index = 0;
-		render();
+	if (caller.hasClass("category")) {
+		$("#exhlist li").each(function() {
+			$(this).removeClass("focused");
+		});
+		$("#" + caller.attr("id")).addClass("focused");
+		exhibition = nameIDs[caller.attr("id")];
+		renderImages();
 	}
-	else if (e.target.id == "exh2010") {
-		exhibition = "2010";
-		$("#exh2010").addClass("focused");
-		$("#exh2014").removeClass("focused");
-		index = 0;
-		render();
-	}
-	else if (caller.is($("#crossfade a"))) {
-		//something else 
+	else {
+		//something else
 	}
 }
 
@@ -202,19 +248,19 @@ function handleclick(caller, e) {
  */
 
 function handleKeyPress(e) {
-    if (e.which == 37) {
-        index--;
-        if (index < 0) {
-            index = imageCount - 1;
-        }
-        showImage();
-    }
-    else if (e.which == 39) {
-        index++;
-        if (index == imageCount) {
-            index = 0;
-        }
-        showImage();
-    }
+	if (e.which == 37) {
+		index--;
+		if (index < 0) {
+			index = imageCount - 1;
+		}
+		showImage();
+	}
+	else if (e.which == 39) {
+		index++;
+		if (index == imageCount) {
+			index = 0;
+		}
+		showImage();
+	}
 }
 

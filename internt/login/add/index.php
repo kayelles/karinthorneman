@@ -13,7 +13,7 @@
             }
 
         ?>
-		<h2>Ta bort bilder</h2>
+		<h2>Lägg till bilder</h2>
         <p>Välj en bild att ladda upp</p>
         <form   enctype="multipart/form-data" 
                 action="uploader.php" 

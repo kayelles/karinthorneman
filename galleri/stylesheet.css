@@ -4,7 +4,8 @@
 
 #crossfade a {
 	width: 600px;
-	left : 0;
+	margin-left: 150px;
+	display: inline-block;
 	position: absolute;
 	-webkit-transition: opacity 0.5s ease-in-out;
 	-moz-transition: opacity 0.5s ease-in-out;
@@ -16,7 +17,7 @@
 }
 
 #crossfade img {
-	margin-left: 150px;
+	display: inline-block;
 	width: 600px;
 	height: auto;
 }
@@ -29,26 +30,14 @@
 
 #contentHolder {
 	border-radius: 10px;
-	margin-top: 25px;
-}
-
-#control {
-    font-size : 15px;
-    position: relative;
-    width   : 150px;
-    height  : 300px;
-    margin-bottom : 50px;
-	margin-right	: 50px;
 }
 
 #exhibitions {
-	margin-top: 25px;
-	margin-left: 50px;
-	width: 900px;
+    position : absolute;
+	width: 125px;
 }
 
 #exhlist {
-    position 		: relative;
     list-style-type : none;
     width 			: inherit;
     padding-left 	: 0;
@@ -58,10 +47,10 @@
 #exhlist  li {
 	border: 1px solid white;
 	border-radius: 10px;
+	text-align 	: center;
 	padding: 10px;
-	font-size: 16px;
+	font-size: 18px;
     color : #666666;
-	display: inline-block;
 }
 
 #exhlist li:hover {
@@ -88,7 +77,7 @@
 }
 
 #description {
-	border: 1px solid #bebebe;
+	/*border: 1px solid #bebebe;*/
 	border-radius: 10px;
 	margin-left : 150px;
 	position	: relative;

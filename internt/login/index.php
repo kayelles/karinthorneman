@@ -12,7 +12,7 @@
 
 <html lang="sv">
     <head>
-        <title>Interna funktiioner</title>
+        <title>Karin Thorneman - Interna funktioner</title>
         <meta charset="utf-8">
     </head>
     <body>
@@ -32,7 +32,15 @@
             <input  type="hidden" 
                     name="action"
                     value="remove" /></br>
-        </form>
+		</form>
+		<form action="change/index.php" method="post">
+			<input	type="submit"
+					name="changeContent"
+					value="Ändra innehåll" /></br>
+            <input  type="hidden" 
+                    name="action"
+                    value="remove" /></br>
+		</form>
         <form action="logout.php" method="post">
             <input  type="submit" 
                     name="logout"

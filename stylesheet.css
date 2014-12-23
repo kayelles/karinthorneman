@@ -45,6 +45,8 @@ body {
     left                : 50%;
     margin-left         : -500px;
 	background-color 	: #ffffff;
+	border-left			: 4px solid #bebebe;
+	border-right		: 4px solid #b5b5b5;
 }
 
 #header {
@@ -111,7 +113,8 @@ body {
 #contentHolder {
     position		: relative;
     font-size		: 16px;
-	margin-bottom	: 100px;
+	margin-top		: 100px;
+	margin-bottom	: 50px;
 	margin-left		: 50px;
 	margin-right	: 50px;
 } 
