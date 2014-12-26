@@ -7,7 +7,7 @@ try {
     // If this request falls under any of them, treat it invalid.
     if (!isset( $_FILES['uploadedfile']['error']) ||
                 is_array($_FILES['uploadedfile']['error'])) {
-        throw new RuntimeException('Invalid parameters.');
+        throw new RuntimeException('Fel parametrar.');
     }
 
     // Check $_FILES['upfile']['error'] value.
@@ -15,17 +15,17 @@ try {
         case UPLOAD_ERR_OK:
             break;
         case UPLOAD_ERR_NO_FILE:
-            throw new RuntimeException('No file sent.');
+            throw new RuntimeException('Ingen fil har skickats.');
         case UPLOAD_ERR_INI_SIZE:
         case UPLOAD_ERR_FORM_SIZE:
-            throw new RuntimeException('Exceeded filesize limit.');
+            throw new RuntimeException('Filen är för stor. Maxstorlek: 1MB');
         default:
-            throw new RuntimeException('Unknown errors.');
+            throw new RuntimeException('Okänt fel.');
     }
 
     // You should also check filesize here.
     if ($_FILES['uploadedfile']['size'] > 1000000) {
-        throw new RuntimeException('Exceeded filesize limit.');
+		throw new RuntimeException('Filen är för stor. Maxstorlek: 1MB');
     }
 
     // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
@@ -40,10 +40,16 @@ try {
         ),
         true
     )) {
-        throw new RuntimeException('Invalid file format.');
+        throw new RuntimeException('Fel filformat. Tillåtna format: .jpeg .png .gif');
     }
     
-    $imagehash = sha1_file($_FILES['uploadedfile']['tmp_name']);
+	$imagehash = sha1_file($_FILES['uploadedfile']['tmp_name']);
+	$names = scandir('../../../uploads/');
+	if (in_array($imagehash . '.jpg', $names) 
+		or in_array($imagehash . '.png', $names)
+		or in_array($imagehash . '.gif', $names)) {
+        throw new RuntimeException('Den här bilden är redan uppladdad.');
+	}
 
     // You should name it uniquely.
     // DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
@@ -52,7 +58,7 @@ try {
         $_FILES['uploadedfile']['tmp_name'],
         sprintf('../../../uploads/%s.%s', $imagehash, $ext))
         ) {
-        throw new RuntimeException('Failed to move uploaded file.');
+        throw new RuntimeException('Misslyckades att ladda upp fil.');
     }
 
 
@@ -70,12 +76,14 @@ try {
                 $width,
                 $height );
 
-    $_SESSION['upload_message'] = "Filen har laddats upp";
-    header("Location: index.php");
+	$_SESSION['upload_message'] = "Filen har laddats upp";
+	echo 'Filen har laddats upp.';
+	echo '<form action="index.php"><input type="submit" value="tillbaka" /></form>';
 } 
 catch (RuntimeException $e) {
-    echo $e->getMessage();
-    $_SESSION['upload_message'] = "Filen kunde inte laddas upp. Kontakta serveradministratören";
+	echo $e->getMessage();
+	echo '<form action="index.php"><input type="submit" value="tillbaka" /></form>';
+    $_SESSION['upload_message'] = "Filen kunde inte laddas upp.";
 }
 
 function addImage(  $filepath, 
@@ -112,11 +120,13 @@ function addImage(  $filepath,
 		$image['height']    = $imageheight;
 		array_push($data_array, $image);
 		$jsondata = json_encode($data_array);
-		file_put_contents($filepath, $jsondata) 
-			or die("failed to write to file");
+		$write_success = file_put_contents($filepath, $jsondata);
+		if (!$write_success) {
+			throw new RuntimeException('Kunde inte skriva till fil: ' . $filepath);
+		}
     }
     else {
-        echo 'Error while loading from file: ' . $filepath;
+        throw new RuntimeException('Kunde inte läsa från filen: ' . $filepath);
     }
 }
 

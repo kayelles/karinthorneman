@@ -11,7 +11,7 @@
 *   [ ] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
 *	[x] Fix remove                                                           * 
-*	[ ] Fix bug upload same image twice                                      *
+*	[x] Fix bug upload same image twice                                      *
 *	[x] make images able to pop out                                          * 
 *	[x] cache images into memory when page is loaded                         *
 *	[ ] Add error checking for file and user input                           * 
