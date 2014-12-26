@@ -20,7 +20,7 @@
         <form action="add/index.php" method="post">
             <input  type="submit" 
                     name="addImage"
-                    value="Ladda upp bilder" /></br>
+                    value="Ladda upp bilder till galleri" /></br>
             <input  type="hidden" 
                     name="action"
                     value="add" /></br>
@@ -28,11 +28,19 @@
         <form action="remove/index.php" method="post">
             <input  type="submit" 
                     name="removeImage"
-                    value="Ta bort bilder" /></br>
+                    value="Ta bort bilder från galleri" /></br>
             <input  type="hidden" 
                     name="action"
                     value="remove" /></br>
 		</form>
+        <form action="changepic/index.php" method="post">
+            <input  type="submit" 
+                    name="changeImage"
+                    value="Ändra andra bilder" /></br>
+            <input  type="hidden" 
+                    name="action"
+                    value="changepic" /></br>
+        </form>
 		<form action="changecategory/index.php" method="post">
 			<input	type="submit"
 					name="changecategory"

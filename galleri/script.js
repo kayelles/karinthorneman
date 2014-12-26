@@ -15,6 +15,7 @@
 *	[x] Add functionality for updating text fields                           * 
 *	[x] Fix bug with description not corresponding to correct image          * 
 *   [x] meta keyword tags                                                    *
+*   [ ] fix last changepix properly                                          *
 *   [ ] test add and remove for different types of images                    *
 *	[ ] Add error checking for file and user input                           * 
 *	[ ] Display error messages indead of Location("header...                 *

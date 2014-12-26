@@ -4,7 +4,6 @@
 
 #text {
     width : 300px;
-	border : 1px solid white;
 	border-radius: 10px;
 	background-color: #d7e0ff;
 	padding		: 25px;
@@ -12,11 +11,15 @@
 }
 
 #image {
+	position: relative;
 	float	:right;
 	width : 500px;
     height : auto;
-    right : 0px;
-    top : 0px;
+}
+
+img {
+	width : 500px;
+    height : auto;
 }
 
 #description {
