@@ -8,22 +8,23 @@
 *	[x] Fix the front page (remove it                                        *
 *	[x] Put category under image in remove page                              *
 *	[x] Fix 'safe' password                                                  * 
-*   [ ] Fix screenheight                                                     *	
-*   [ ] test add and remove for different types of images                    *
 *	[x] Fix remove                                                           * 
 *	[x] Fix bug upload same image twice                                      *
 *	[x] make images able to pop out                                          * 
 *	[x] cache images into memory when page is loaded                         *
-*	[ ] Add error checking for file and user input                           * 
 *	[x] Add functionality for updating text fields                           * 
 *	[x] Fix bug with description not corresponding to correct image          * 
+*   [x] meta keyword tags                                                    *
+*   [ ] test add and remove for different types of images                    *
+*	[ ] Add error checking for file and user input                           * 
+*	[ ] Display error messages indead of Location("header...                 *
+*   [ ] check on ipad, iphone                                                *
 * 	[ ] check for all browsers                                               * 
+*   [ ] Fix screenheight                                                     *	
+*   [ ] Check on different monitors                                          *
 *          [ ] Internet Explorer                                             *
 *          [ ] Google chrome                                                 *
 *          [ ] Safari                                                        *
-*   [ ] Check on different monitors                                          *
-*   [ ] check on ipad, iphone                                                *
-*   [ ] meta keyword tags                                                    *
 *   [x] fix so it's possible to upload to right category                     *
 *   [x] make the categories always sorted under remove picture               *
 /*===========================================================================*/ 
