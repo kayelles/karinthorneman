@@ -60,16 +60,18 @@ var categoryData = {
 $(document).ready(function() {
             
 	$.ajax({
-		"type" : "post",
+		"type" : "get",
 		"url" : "../data/imagedata.json",
-		"dataType": "json",
+		datatype: "json",
+		async: false,
 		"success" : function(data) {
 			image_json = data;
 
 			$.ajax({
-				"type" : "post",
+				"type" : "get",
 				"url" : "../data/categories.json",
-				"dataType": "json",
+				datatype: "json",
+				async: false,
 				"success" : function(data) {
 					category_json = data;
 					render();
@@ -83,12 +85,10 @@ $(document).ready(function() {
 					alert("Error: (c) Content could not be loaded "); 
 				}
 			});
-
 		},
-		"error" : function() { alert("Error: Content could not be loaded"); }
+		"error" : function() { alert("Error: (i)Content could not be loaded"); }
 	});
-
-	
+	return false;	
 });
 
 /*
