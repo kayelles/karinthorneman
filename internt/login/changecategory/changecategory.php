@@ -3,10 +3,15 @@
 	
     session_start();
 
-	$categoryname = $_POST['category'];
 	$action = $_POST['action'];
-	$pattern = '/[a-zA-Z0-9\s]+/';
-	$filepath = '../../../data/categories.json';
+	if ($action == "add" or $action == "remove") {
+		$pattern = '/[a-zA-Z0-9\s]+/';
+		$categoryname = $_POST['category'];
+		$filepath = '../../../data/categories.json';
+	}
+	else {
+		die("Unknown action");
+	}
 	$input = file_get_contents($filepath);
 	$data_array = json_decode($input);
 	if ($data_array == null or $data_array == false or empty((array)$data_array)) {
@@ -14,15 +19,13 @@
 	}
 	if ($action == "add") {	
 		if (preg_match($pattern, $categoryname)) { 
+			$res = $data_array;
 			$category = array();
 			$category['name'] = $categoryname;
-			array_push($data_array, $category);
-			$jsondata = json_encode($data_array);
-			file_put_contents($filepath, $jsondata) 
-				or die("failed to write to file");
+			array_push($res, $category);
 		}
 		else {
-			die("Invalid input name");
+			die("Invalid category name. Name can contain letters and numbers");
 		}
 	} 
 	else if ($action == "remove") {
@@ -33,9 +36,9 @@
 				array_push($res, $val);
 			}
 		}
-		$jsondata = json_encode($res);
-		file_put_contents($filepath, $jsondata) 
-			or die("failed to write to file");
 	}
+	$jsondata = json_encode($res);
+	file_put_contents($filepath, $jsondata) 
+		or die("failed to write to file");
 	header("Location: index.php");
 ?>

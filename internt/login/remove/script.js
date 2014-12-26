@@ -3,14 +3,15 @@
 
 // global variables
 
-var imageCount = 0;
+var imageCount, categoryCount;
 var screenheight = 0;
-var imageList = [];
+var imageList;
 
 /*	The object that is to be loaded with server data*/
 
 var imageData = {
 	"ids"			: [],
+	"exhibitions"	: [],
     "paths"         : []
 };
 
@@ -29,6 +30,7 @@ $(document).ready(function() {
             for (var i = 0; i < data.length; i++) {
                 imageData["ids"].push(data[i].id);
                 imageData["paths"].push(data[i].src);
+				imageData["exhibitions"].push(data[i].exh);
             }
 
             // Initialize rendering
@@ -40,8 +42,6 @@ $(document).ready(function() {
 				handleclick($(this), e)
 			});
             $(document).on("keydown", function(e) { handleKeyPress(e) });
-
-
         },
         "error" : function() { alert("Error: Content could not be loaded"); }
     });
@@ -63,29 +63,40 @@ function render() {
 */
 
 function getImagedata() {
+	imageList = [];
     imageCount  = 0;
+	categoryCount = 0;
+	for (i = 0; i < imageData["paths"].length; i++) {
+		if (!imageList.hasOwnProperty(imageData["exhibitions"][i])) {
+			categoryCount++;
+			imageList[imageData["exhibitions"][i]] = [];
+		}
+	}
     for (i = 0; i < imageData["paths"].length; i++) {
 		var imagetag = '<img class="clickable" src="' + 
 						"../../" + imageData["paths"][i] + '" />';
 		imageCount++;
-		imageList.push(imagetag);
+		imageList[imageData["exhibitions"][i]].push(imagetag);
     }
 }
 
 /* Displays an image with index index  */
 
 function addImages() {
-	for (i = 0; i < imageList.length; i++) {
-		$("#images").append(imageList[i]);
+	for (var key in imageList) {
+		$("#images").append("</br><h2>" + key + "</h2>");
+		if (imageList.hasOwnProperty(key)) {
+			$("#images").append(imageList[key]);
+		}
+		$("#images").append("</br></br></br><hr>");
 	}
 	updateScreenSize();
 }
 
 function updateScreenSize() {
 	rows = Math.floor(imageCount / 4);
-	console.log(rows);
-	if (rows >= 4) {
-		$("#container").css("height", 1225 + ((rows - 3) * 300));
+	if (rows >= 3) {
+		$("#container").css("height", 1225 + ((rows - 3) * 300) + categoryCount * 200);
 	}
 }
 
@@ -101,10 +112,7 @@ function handleclick(caller, e) {
 	if (window.confirm("är du säker?")) {
 		image_path = caller.attr("src");
 		image_id = getIDFromPath(image_path);
-		console.log(image_id);
-		console.log(image_path);
 		$.post("remove.php", {path:image_path, id:image_id}, function(data) {
-			console.log(data);
 			window.location.href = "index.php";
 		});
 	}

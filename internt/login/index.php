@@ -33,13 +33,21 @@
                     name="action"
                     value="remove" /></br>
 		</form>
-		<form action="change/index.php" method="post">
+		<form action="changecategory/index.php" method="post">
 			<input	type="submit"
-					name="changeContent"
-					value="Ändra innehåll" /></br>
+					name="changecategory"
+					value="Lägg till eller ta bort bildkategorier" /></br>
             <input  type="hidden" 
                     name="action"
-                    value="remove" /></br>
+                    value="changecategory" /></br>
+		</form>
+		<form action="changetext/index.php" method="post">
+			<input	type="submit"
+					name="changetext"
+					value="Ändra textinnehåll" /></br>
+            <input  type="hidden" 
+                    name="action"
+                    value="changetext" /></br>
 		</form>
         <form action="logout.php" method="post">
             <input  type="submit" 

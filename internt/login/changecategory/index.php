@@ -4,8 +4,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-		<h2>Ändra kategorier eller textinnehåll</h2>
-		<p>Lägg till en kategori för bilder</p>
+		<h1>Lägg till/ta bort kategorier</h1>
         <?php
             session_start();
 
@@ -32,8 +31,9 @@
 			}
 				echo '</p>';
 
-        ?>
-        <form   action="change.php" 
+		?>
+		<h2>Lägg till</h2>
+        <form   action="changecategory.php" 
                 method="post">
 			</br>
 			<input  type="text"
@@ -43,9 +43,9 @@
             <input  type="hidden" 
                     name="action"
                     value="add" /></br>
-        </form>
-		<p>Ta bort en kategori för bilder</p>
-        <form   action="change.php" 
+		</form>
+		<h2>Ta bort</h2>
+        <form   action="changecategory.php" 
                 method="post">
 			</br>
 			<input  type="text"
@@ -59,6 +59,5 @@
         <form action="../index.php">
             <input type="submit" value="Tillbaka" />
         </form>
-        
     </body>
 </html>

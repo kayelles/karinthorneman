@@ -88,7 +88,7 @@ function addImage(  $filepath,
     if (file_exists($filepath)) {
         $input = file_get_contents($filepath);
         $data_array = json_decode($input);
-		if ($data_array == null or $data_array == false or (array)empty($data_array)) {
+		if ($data_array == null or $data_array == false or empty((array)$data_array)) {
             $data_array = [];
 		}
 

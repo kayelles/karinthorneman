@@ -8,23 +8,21 @@
 }
 
 #upper {
+	border-bottom: 1px solid #bebebe;
 	position: relative;
-	height: 425px;
 	width: 900px;
+	padding-bottom: 50px;
 }
 
 #lower {
+	top: 50px;
 	position: relative;
-	padding-top : 50px;
-    border-top : 1px solid #bebebe;
-	height: 500px;
 	width: 900px;
 }
 
 #text {
 	margin-left: 50px;
 	width 	: 400px;
-	height 	: 315px;
 	padding	: 25px;
 	border 	: 1px solid white;
 	background-color: #d7e0ff;
@@ -44,7 +42,6 @@
 #exhib {
 	margin-left: 50px;
 	width : 400px;
-	height: 250px;
 	padding		: 25px;
 	border : 1px solid white;
 	border-radius: 10px;
@@ -53,18 +50,17 @@
 	float: left;
 }
 
-#exhib li {
-    list-style-type : none;
+#exhib p {
     padding         : 10px;
-    margin-left     : -50px;
+    margin-left     : 0px;
 }
 
 #contactinfo {
+	text-align: center;
 	margin-right: 50px;
 	float: right;
-	width : 200px;
-	height: 250px;
-	padding		: 25px;
+	width : 250px;
+	padding	: 25px;
 	border : 1px solid white;
 	border-radius: 10px;
 	background-color: #d7e0ff;

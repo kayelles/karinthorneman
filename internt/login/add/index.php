@@ -1,7 +1,8 @@
+<!doctype html>
 <html>
     <head>
         <title>Lägg till bilder</title>
-        <meta charset="utf-8">
+		<meta charset="utf-8">
     </head>
     <body>
         <?php
@@ -13,7 +14,10 @@
             }
 
         ?>
-		<h2>Lägg till bilder</h2>
+		<h1>Lägg till bilder</h1>
+        <form action="../index.php">
+            <input type="submit" value="Tillbaka" />
+        </form>
         <p>Välj en bild att ladda upp</p>
         <form   enctype="multipart/form-data" 
                 action="uploader.php" 
@@ -30,19 +34,26 @@
 						wrap="physical"></textarea>
             </br>
             </br>
-            <p>Välj utställning:</p>
-            <select size="2" name="exhib">
-                <option selected="selected" value="2014">2014</option>
-                <option value="2010">2010</option>
+			<p>Välj utställning:</p>
+			<?php 
+				$filepath = '../../../data/categories.json';
+				$input = file_get_contents($filepath);
+				$data_array = json_decode($input);
+				echo '<select size="' . count($data_array) . '" name="exhib">';
+				foreach ($data_array as $val) {
+					$acc = array();
+					$properties = get_object_vars($val);
+						echo '<option selected="selected" value="' 
+							. $properties['name'] 
+							. '">' . $properties['name']
+						    . '</option>';
+				}
+			?>
             </select>
             </br>
             </br>
             <input  type="submit" 
                     value="Ladda upp" />
         </form>
-        <form action="../index.php">
-            <input type="submit" value="Tillbaka" />
-        </form>
-        
     </body>
 </html>

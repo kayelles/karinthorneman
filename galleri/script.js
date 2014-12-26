@@ -6,7 +6,7 @@
 *                                                                            *
 *   [x] add functionality for adding more categories                         *
 *	[x] Fix the front page (remove it                                        *
-*	[ ] Put category under image in remove pag                               *
+*	[x] Put category under image in remove page                              *
 *	[ ] Fix 'safe' password                                                  * 
 *   [ ] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
@@ -14,7 +14,7 @@
 *	[x] make images able to pop out                                          * 
 *	[x] cache images into memory when page is loaded                         *
 *	[ ] Add error checking for file and user input                           * 
-*	[ ] Add functionality for updating description and text fields           * 
+*	[x] Add functionality for updating text fields                           * 
 *	[x] Fix bug with description not corresponding to correct image          * 
 * 	[ ] check for all browsers                                               * 
 *          [ ] Internet Explorer                                             *
@@ -23,7 +23,8 @@
 *   [ ] Check on different monitors                                          *
 *   [ ] check on ipad, iphone                                                *
 *   [ ] meta keyword tags                                                    *
-*   [ ] change text functionality                                            *
+*   [x] fix so it's possible to upload to right category                     *
+*   [ ] make the categories always sorted under remove picture               *
 /*===========================================================================*/ 
 
 // global variables
@@ -63,25 +64,27 @@ $(document).ready(function() {
 		"dataType": "json",
 		"success" : function(data) {
 			image_json = data;
+
+			$.ajax({
+				"type" : "post",
+				"url" : "../data/categories.json",
+				"dataType": "json",
+				"success" : function(data) {
+					category_json = data;
+					render();
+					// Handle IO events
+					$('.clickable').on('click', function(e) { 
+						handleclick($(this), e)
+					});
+					$(document).on("keydown", function(e) { handleKeyPress(e) });
+				},
+				"error" : function() { alert("Error: Content could not be loaded"); }
+			});
+
 		},
 		"error" : function() { alert("Error: Content could not be loaded"); }
 	});
 
-	$.ajax({
-		"type" : "post",
-		"url" : "../data/categories.json",
-		"dataType": "json",
-		"success" : function(data) {
-			category_json = data;
-			render();
-			// Handle IO events
-			$('.clickable').on('click', function(e) { 
-				handleclick($(this), e)
-			});
-			$(document).on("keydown", function(e) { handleKeyPress(e) });
-		},
-		"error" : function() { alert("Error: Content could not be loaded"); }
-	});
 	
 });
 

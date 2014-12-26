@@ -15,10 +15,6 @@
         <meta charset   =utf-8>
         <link   type    ="text/css" 
                 rel     ="stylesheet" 
-                href    ="../../../stylesheet.css"
-                media   ="screen" />
-        <link   type    ="text/css" 
-                rel     ="stylesheet" 
                 href    ="stylesheet.css"
                 media   ="screen" />
         <link   rel     ="stylesheet" 
@@ -30,7 +26,7 @@
         </noscript>
         <div id = "container"> 
             <div id="header">
-				<h2>Ta bort bilder</h2>
+				<h1>Ta bort bilder</h1>
 				<p>Tryck på den bild du vill ta bort</p>
 			<form action="../index.php">
 				<input type="submit" value="Tillbaka" />
