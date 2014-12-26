@@ -80,13 +80,26 @@ function getImagedata() {
     }
 }
 
+function sortByKey(myObj) {
+}
+
 /* Displays an image with index index  */
 
 function addImages() {
-	for (var key in imageList) {
-		$("#images").append("</br><h2>" + key + "</h2>");
-		if (imageList.hasOwnProperty(key)) {
-			$("#images").append(imageList[key]);
+	var keys = [];
+	var k, i, len;
+	for (k in imageList) {
+		if (imageList.hasOwnProperty(k)) {
+			keys.push(k)
+		}
+	}
+	keys.sort();
+	len = keys.length;
+	for (i = 0; i < len; i++) {
+		k = keys[i];
+		$("#images").append("</br><h2>" + k + "</h2>");
+		if (imageList.hasOwnProperty(k)) {
+			$("#images").append(imageList[k]);
 		}
 		$("#images").append("</br></br></br><hr>");
 	}

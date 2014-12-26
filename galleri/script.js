@@ -7,7 +7,7 @@
 *   [x] add functionality for adding more categories                         *
 *	[x] Fix the front page (remove it                                        *
 *	[x] Put category under image in remove page                              *
-*	[ ] Fix 'safe' password                                                  * 
+*	[x] Fix 'safe' password                                                  * 
 *   [ ] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
 *	[x] Fix remove                                                           * 
@@ -24,7 +24,7 @@
 *   [ ] check on ipad, iphone                                                *
 *   [ ] meta keyword tags                                                    *
 *   [x] fix so it's possible to upload to right category                     *
-*   [ ] make the categories always sorted under remove picture               *
+*   [x] make the categories always sorted under remove picture               *
 /*===========================================================================*/ 
 
 // global variables
