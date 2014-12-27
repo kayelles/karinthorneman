@@ -18,7 +18,10 @@
         <form action="../index.php">
             <input type="submit" value="Tillbaka" />
         </form>
-        <p>Välj en bild att ladda upp</p>
+		<hr>
+		</br>
+		</br>
+        <h2>Välj en bild att ladda upp</h2>
         <form   enctype="multipart/form-data" 
                 action="uploader.php" 
                 method="post">

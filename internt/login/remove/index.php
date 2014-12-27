@@ -31,6 +31,7 @@
 			<form action="../index.php">
 				<input type="submit" value="Tillbaka" />
 			</form>
+			<hr>
             </div>
 			<div id="infoarea"></div>        
 			<div id="images"></div>

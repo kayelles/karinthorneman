@@ -49,25 +49,22 @@ try {
     // On this example, obtain safe unique name from its binary data.
     if (!move_uploaded_file(
         $_FILES['uploadedfile']['tmp_name'],
-        sprintf('../../../uploads/%s.%s', $imagehash, $ext))
+        sprintf('../../../uploads/singles/%s.%s', $imagehash, $ext))
         ) {
         throw new RuntimeException('Misslyckades att ladda upp fil.');
     }
 
 
     $filesrc = $imagehash . "." . $ext;
-    $filesrc_rel_datadir = "../uploads/" . $filesrc;
-    $filesrc_rel_uploaddir = "../../../uploads/" . $filesrc;
+    $filesrc_rel_datadir = "../uploads/singles/" . $filesrc;
+    $filesrc_rel_uploaddir = "../../../uploads/singles/" . $filesrc;
 
     $size = getimagesize($filesrc_rel_uploaddir);
     $width = $size[0];
     $height = $size[1];
-    addImage(   "../../../data/singleimagedata.json", 
-                $_POST['exhib'],
+    addImage(   "../../../data/homeimagedata.json", 
                 $filesrc_rel_datadir, 
-                "<p>" . $_POST['description'] . "</p>",
-                $width,
-                $height );
+                "<p>" . $_POST['description'] . "</p>");
 
 	$_SESSION['upload_message'] = "Filen har laddats upp";
 	echo 'Filen har laddats upp.';
@@ -80,18 +77,14 @@ catch (RuntimeException $e) {
 }
 
 function addImage(  $filepath, 
-                    $imageexh,
                     $imagesrc, 
-                    $imagedesc, 
-                    $imagewidth, 
-                    $imageheight    ) {
+                    $imagedesc) {
 
     if (file_exists($filepath)) {
 		$data_array = array();
 		$image = array();
 		$image['src']       = $imagesrc;
-		$image['width']     = $imagewidth;
-		$image['height']    = $imageheight;
+		$image['desc']      = $imagedesc;
 		array_push($data_array, $image);
 		$jsondata = json_encode($data_array);
 		$write_success = file_put_contents($filepath, $jsondata);

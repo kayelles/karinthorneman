@@ -16,7 +16,15 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h3>Välkommen</h3>
+		<h1>Interna funktioner</h1>
+        <form action="logout.php" method="post">
+            <input  type="submit" 
+                    name="logout"
+                    value="Logga ut" /></br>
+		</form>
+		<hr>
+		</br>
+		</br>
         <form action="add/index.php" method="post">
             <input  type="submit" 
                     name="addImage"
@@ -57,10 +65,11 @@
                     name="action"
                     value="changetext" /></br>
 		</form>
-        <form action="logout.php" method="post">
-            <input  type="submit" 
-                    name="logout"
-                    value="Logga ut" /></br>
-        </form>
+		</br>
+		<h2>Formatteringshjälp:</h2>
+		<h3>För en paragraf</h3>
+		<p>&ltp&gt<i>text</i>&lt/p&gt</p>
+		<h3>Radbyte</h3>
+		<p>&lt/br&gt</p>
     </body>
 </html>

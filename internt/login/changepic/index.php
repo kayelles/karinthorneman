@@ -18,12 +18,21 @@
         <form action="../index.php">
             <input type="submit" value="Tillbaka" />
 		</form>
+		<hr>
 		<h2>Hem</h2>
         <form   enctype="multipart/form-data" 
                 action="homeuploader.php" 
                 method="post">
             <input  type="file" 
                     name="uploadedfile" />
+            </br>
+            </br>
+            <p>Ge bilden under hem en beskrivning:</p>
+            <textarea 	name="description" 
+						value="" 
+						rows="3" 
+						cols="50" 
+						wrap="physical"></textarea>
             </br>
             </br>
             <input  type="submit" 

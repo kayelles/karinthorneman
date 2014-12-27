@@ -78,6 +78,7 @@
 
 #description {
 	/*border: 1px solid #bebebe;*/
+    font-style: italic;
 	border-radius: 10px;
 	margin-left : 150px;
 	position	: relative;

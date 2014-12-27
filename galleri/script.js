@@ -15,7 +15,7 @@
 *	[x] Add functionality for updating text fields                           * 
 *	[x] Fix bug with description not corresponding to correct image          * 
 *   [x] meta keyword tags                                                    *
-*   [ ] fix last changepix properly                                          *
+*   [x] fix last changepix properly                                          *
 *   [ ] test add and remove for different types of images                    *
 *	[ ] Add error checking for file and user input                           * 
 *	[ ] Display error messages indead of Location("header...                 *
@@ -105,6 +105,7 @@ function render() {
 }
 
 function renderImages() {
+	index = 0;
 	$("#crossfade").empty();
 	descList = [];
 	loadImageData();
@@ -204,8 +205,12 @@ function updateImageInfo() {
 
 	$("#description").empty();
 	$("#description").append(descList[index]);
-	$("#container").css("height", 1400);
-	$("#contentHolder").css("height", scaledHeight + 200);
+	if (scaledHeight > 700) {
+		$("#container").css("height", 1500);
+	}
+	else {
+		$("#container").css("height", 1225);
+	}
 	$("#description").css("top", scaledHeight + 50);
 	$("#whichimage").empty();
 	if (imageCount > 0) {

@@ -23,10 +23,8 @@ img {
 }
 
 #description {
-    height : auto;
-    position : absolute;
-    left : 850px;
-	top: 420px;
+    position : relative;
+	float: right;
     font-style: italic;
 }
 

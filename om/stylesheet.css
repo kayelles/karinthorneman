@@ -1,8 +1,4 @@
 
-#container {
-	height: 1300px;
-}
-
 #contentHolder {
 	margin-top: 100px;
 }
@@ -21,8 +17,7 @@
 }
 
 #text {
-	margin-left: 50px;
-	width 	: 400px;
+	width 	: 450px;
 	padding	: 25px;
 	border 	: 1px solid white;
 	background-color: #d7e0ff;
@@ -32,16 +27,14 @@
 #image {
 	position: relative;
 	float: right;
-	margin-right : 50px;
 }
 
 #image > img {
-	width : 300px;
+	width : 350px;
 }
 
 #exhib {
-	margin-left: 50px;
-	width : 400px;
+	width : 450px;
 	padding		: 25px;
 	border : 1px solid white;
 	border-radius: 10px;
@@ -52,14 +45,12 @@
 
 #exhib p {
     padding         : 10px;
-    margin-left     : 0px;
 }
 
 #contactinfo {
 	text-align: center;
-	margin-right: 50px;
 	float: right;
-	width : 250px;
+	width : 300px;
 	padding	: 25px;
 	border : 1px solid white;
 	border-radius: 10px;

@@ -7,7 +7,10 @@
 		<h1>Ändra textinnehåll</h1>
         <form action="../index.php">
             <input type="submit" value="Tillbaka" />
-        </form>
+		</form>
+		<hr>
+		</br>
+		</br>
 		<h2>Hem</h2>
         <?php
             session_start();

@@ -5,6 +5,11 @@
     </head>
     <body>
 		<h1>Lägg till/ta bort kategorier</h1>
+        <form action="../index.php">
+            <input type="submit" value="Tillbaka" />
+		</form>
+		<hr>
+		</br>
         <?php
             session_start();
 
@@ -55,9 +60,6 @@
             <input  type="hidden" 
                     name="action"
                     value="remove" /></br>
-        </form>
-        <form action="../index.php">
-            <input type="submit" value="Tillbaka" />
         </form>
     </body>
 </html>
