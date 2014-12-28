@@ -11,7 +11,7 @@
 
 <html lang="en">
     <head>
-        <title>Karin Thorneman</title>
+        <title>Karin Thorneman - Ta bort bilder</title>
         <meta charset   =utf-8>
         <link   type    ="text/css" 
                 rel     ="stylesheet" 

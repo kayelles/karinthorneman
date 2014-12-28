@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Karin Thorneman - ändra</title>
+        <title>Karin Thorneman - ändra text</title>
         <meta charset="utf-8">
 	</head>
 	<body>

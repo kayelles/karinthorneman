@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Lägg till bilder</title>
+        <title>Karin Thorneman - Lägg till bilder</title>
 		<meta charset="utf-8">
     </head>
     <body>
