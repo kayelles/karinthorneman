@@ -6,9 +6,9 @@ $(document).ready(function() {
 		"datatype" : "json",
 		"async" : "false",
         "url" : "../data/homeimagedata.json",
-        "success" : function(data) {
-			$("#image").prepend('<img src="' + data[0].src + '"</img>');
-			$("#description").append('<p>' + data[0].desc + '</p>');
+        "success" : function(imagedata) {
+			$("#image").prepend('<img src="' + imagedata[0].src + '"</img>');
+			$("#description").append('<p>' + imagedata[0].desc + '</p>');
 			$.ajax({
 				"type" : "get",
 				"url" : "../data/text.json",

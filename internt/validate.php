@@ -17,20 +17,22 @@
 		if ($data_array == null or $data_array == false or empty((array)$data_array)) {
 			$data_array = new stdClass();
 			$data_array->passwd = $givenhash;
-			echo var_dump($data_array->passwd);
 			$_SESSION['loggedin'] = true;
 			$_SESSION['username'] = $username;
 			$jsondata = json_encode($data_array);
-			file_put_contents($filepath, $jsondata) 
-				or die("failed to write to file");
-			header('Location: newpass.php');
-			die();
+			$success = file_put_contents($filepath, $jsondata);
+			if ($success) {
+				header('Location: newpass.php');
+			}
+			else {
+				echo 'Det har uppstått ett fel. Kontakta serveradministratören';
+				echo '<form action="index.html">
+					<input type="submit" value="tillbaka" /></form>';
+				die();
+			}
 		} 
 		else {
 			$storedhash = $data_array->passwd;
-			echo $username;
-			echo $givenhash . "</br>";
-			echo $storedhash . "</br>";
 			if ($username == 'karin' and $givenhash == $storedhash) {
 				$_SESSION['loggedin'] = true;
 				$_SESSION['username'] = $username;
@@ -38,7 +40,10 @@
 				die();
 			}
 			else {
-				echo 'Password or username is incorrect';
+				echo 'Fel användarnamn/lösenord';
+				echo '<form action="index.html">
+					<input type="submit" value="tillbaka" /></form>';
+				die();
 			}
 		}
 		?>

@@ -16,12 +16,12 @@
 *	[x] Fix bug with description not corresponding to correct image          * 
 *   [x] meta keyword tags                                                    *
 *   [x] fix last changepix properly                                          *
+*	[x] Add error checking for file and user input                           * 
+*	[x] Display error messages indead of Location("header...                 *
+*   [x] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
-*	[ ] Add error checking for file and user input                           * 
-*	[ ] Display error messages indead of Location("header...                 *
 *   [ ] check on ipad, iphone                                                *
 * 	[ ] check for all browsers                                               * 
-*   [ ] Fix screenheight                                                     *	
 *   [ ] Check on different monitors                                          *
 *          [ ] Internet Explorer                                             *
 *          [ ] Google chrome                                                 *
