@@ -21,9 +21,21 @@ try {
             throw new RuntimeException('Filen är för stor. Maxstorlek: 1MB');
         default:
             throw new RuntimeException('Okänt fel.');
-    }
+	}
 
-    // You should also check filesize here.
+
+	//remove the old file 
+	$files = glob('../../../uploads/singles/about/*');
+	foreach($files as $file) {
+		if (is_file($file) and file_exists($file)) {
+			unlink($file) or die("Could not delete the image");
+		}
+		else {
+			throw new RuntimeException($file . 'is not an file');
+		}
+	} 
+	
+	// You should also check filesize here.
     if ($_FILES['uploadedfile']['size'] > 1000000) {
 		throw new RuntimeException('Filen är för stor. Maxstorlek: 1MB');
     }
@@ -49,15 +61,15 @@ try {
     // On this example, obtain safe unique name from its binary data.
     if (!move_uploaded_file(
         $_FILES['uploadedfile']['tmp_name'],
-        sprintf('../../../uploads/singles/%s.%s', $imagehash, $ext))
+        sprintf('../../../uploads/singles/about/%s.%s', $imagehash, $ext))
         ) {
         throw new RuntimeException('Misslyckades att ladda upp fil.');
     }
 
 
     $filesrc = $imagehash . "." . $ext;
-    $filesrc_rel_datadir = "../uploads/singles/" . $filesrc;
-    $filesrc_rel_uploaddir = "../../../uploads/singles/" . $filesrc;
+    $filesrc_rel_datadir = "../uploads/singles/about/" . $filesrc;
+    $filesrc_rel_uploaddir = "../../../uploads/singles/about/" . $filesrc;
 
     $size = getimagesize($filesrc_rel_uploaddir);
     $width = $size[0];

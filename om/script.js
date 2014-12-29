@@ -5,8 +5,10 @@ $(document).ready(function() {
 		"datatype" : "json",
 		"async" : "false",
         "url" : "../data/karinimagedata.json",
-        "success" : function(data) {
-			$("#image").prepend('<img src="' + data[0].src + '"</img>');
+        "success" : function(imagedata) {
+			if (imagedata.length > 0) {
+				$("#image").prepend('<img src="' + imagedata[0].src + '"</img>');
+			}
 			$.ajax({
 				"type" : "get",
 				"url" : "../data/text.json",
@@ -14,8 +16,6 @@ $(document).ready(function() {
 					$("#text").append(data.texts.aboutme);
 					$("#exhib").append(data.texts.exhibs);
 					$("#contactinfo").append(data.texts.contact);
-					console.log($("#exhib").height());
-					console.log($("#contactinfo").height());
 					var big = Math.max($("#exhib").height(), $("#contactinfo").height());
 					if (big > 250) {
 						$("#container").css("height", 1225 + (big - 250));

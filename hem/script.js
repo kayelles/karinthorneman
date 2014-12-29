@@ -7,8 +7,10 @@ $(document).ready(function() {
 		"async" : "false",
         "url" : "../data/homeimagedata.json",
         "success" : function(imagedata) {
-			$("#image").prepend('<img src="' + imagedata[0].src + '"</img>');
-			$("#description").append('<p>' + imagedata[0].desc + '</p>');
+			if (imagedata.length > 0) {
+				$("#image").prepend('<img src="' + imagedata[0].src + '"</img>');
+				$("#description").append('<p>' + imagedata[0].desc + '</p>');
+			}
 			$.ajax({
 				"type" : "get",
 				"url" : "../data/text.json",

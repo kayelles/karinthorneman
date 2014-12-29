@@ -217,10 +217,10 @@ function updateImageInfo() {
 	$("#description").css("top", scaledHeight + 50);
 	$("#whichimage").empty();
 	if (imageCount > 0) {
-		$("#whichimage").append((index + 1) + "/" + imageCount);
+		$("#whichimage").append("Bild " + (index + 1) + " av " + imageCount);
 	} 
 	else {
-		$("#whichimage").append("No images");
+		$("#whichimage").append("Inga bilder");
 	}
 }
 
