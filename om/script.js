@@ -14,6 +14,15 @@ $(document).ready(function() {
 					$("#text").append(data.texts.aboutme);
 					$("#exhib").append(data.texts.exhibs);
 					$("#contactinfo").append(data.texts.contact);
+					console.log($("#exhib").height());
+					console.log($("#contactinfo").height());
+					var big = Math.max($("#exhib").height(), $("#contactinfo").height());
+					if (big > 250) {
+						$("#container").css("height", 1225 + (big - 250));
+					}
+					else {
+						$("#container").css("height", 1225);
+					}
 				},
 				"error" : function(data) {
 					alert("Error: Content could not be loaded");

@@ -11,7 +11,7 @@
 		<hr>
 		</br>
 		</br>
-		<h2>Hem</h2>
+		<h2>Hem 1</h2>
         <?php
             session_start();
 
@@ -52,6 +52,52 @@
             <input  type="hidden" 
                     name="action"
                     value="changehometext" /></br>
+		</form>
+		<h2>Hem 2</h2>
+        <?php
+            session_start();
+
+            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+                echo "<p>please log in to see this page</p>";
+                die();
+            }
+
+			$filepath = '../../../data/text.json';
+			$input = file_get_contents($filepath);
+			$data_array = json_decode($input);
+
+			if ($data_array == null or $data_array == false or empty((array)$data_array)) {
+				echo '<p>[ Inget! ]</p>';
+				$data_array = [];
+			}
+			echo "Förhandsvisning:";
+			echo "<hr>";
+			echo $data_array->texts->intro2;
+			echo "<hr>";
+			foreach ($data_array as $val) {
+				echo '<p>';
+				$properties = get_object_vars($val);
+			}
+			echo '</p>';
+
+        ?>
+        <form   action="changetext.php" 
+                method="post">
+			</br>
+			<input  type="checkbox"
+					checked="true"
+					name="visible" 
+					value="ischecked" />Synlig</br>
+            <textarea 	name="text" 
+						value="" 
+						rows="3" 
+						cols="50" 
+						wrap="physical"></textarea>
+            <input  type="submit" 
+                    value="ändra" />
+            <input  type="hidden" 
+                    name="action"
+					value="changehometext2" /></br>
 		</form>
 		<h2>Om mig</h2>
         <?php

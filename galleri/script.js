@@ -30,6 +30,9 @@
 *   [x] make the categories always sorted under remove picture               *
 /*===========================================================================*/ 
 
+/* To inform about. 
+ * It is possible to tchange Pictures and text. */
+
 // global variables
 var index = 0;
 var imageCount = 0;

@@ -67,6 +67,12 @@
 		</form>
 		</br>
 		<h2>Formatteringshjälp:</h2>
+		<h3>För en stor rubrik</h3>
+		<p>&lth1&gt<i>text</i>&lt/h1&gt</p>
+		<h3>För en mellan rubrik</h3>
+		<p>&lth2&gt<i>text</i>&lt/h2&gt</p>
+		<h3>För en liten rubrik</h3>
+		<p>&lth3&gt<i>text</i>&lt/h3&gt</p>
 		<h3>För en paragraf</h3>
 		<p>&ltp&gt<i>text</i>&lt/p&gt</p>
 		<h3>Radbyte</h3>
