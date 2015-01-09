@@ -17,8 +17,8 @@ $(document).ready(function() {
 					$("#exhib").append(data.texts.exhibs);
 					$("#contactinfo").append(data.texts.contact);
 					var big = Math.max($("#exhib").height(), $("#contactinfo").height());
-					if (big > 250) {
-						$("#container").css("height", 1225 + (big - 250));
+					if (big > 200) {
+						$("#container").css("height", 1225 + (big - 200));
 					}
 					else {
 						$("#container").css("height", 1225);

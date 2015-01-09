@@ -54,7 +54,7 @@ body {
 	border-bottom 	: 1px solid #bebebe;
     width : 900px;
 	left : 50px;	
-	height : 125px;
+	height : 150px;
 }
 
 #logo {
@@ -67,9 +67,9 @@ body {
 #logo img {
 	position: relative;
 	left	: 0px;
-	height : 100px;
+	height : 105px;
 	width : auto; 
-	top : 12px;
+	top : 37px;
 	opacity: 0.75;
 }
 
@@ -77,7 +77,7 @@ body {
     position		: absolute;
     width           : 900px;
     text-align      : right;
-	top				: 50px;
+	top				: 75px;
 }
 
 
