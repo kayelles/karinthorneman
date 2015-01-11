@@ -21,8 +21,8 @@
 *   [x] Fix screenheight                                                     *	
 *   [ ] test add and remove for different types of images                    *
 *   [ ] check on ipad, iphone                                                *
-* 	[ ] check for all browsers                                               * 
 *   [ ] Check on different monitors                                          *
+* 	[ ] check for all browsers                                               * 
 *          [ ] Internet Explorer                                             *
 *          [ ] Google chrome                                                 *
 *          [ ] Safari                                                        *
