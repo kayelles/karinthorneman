@@ -5,7 +5,7 @@
 	try {
 		$action = $_POST['action'];
 		if ($action == "add" or $action == "remove") {
-			$pattern = '/^[a-zA-Z0-9\s]+$/';
+			$pattern = '/^[a-zåäöÅÄÖA-Z0-9\s]+$/';
 			$categoryname = $_POST['category'];
 			$filepath = '../../../data/categories.json';
 		}

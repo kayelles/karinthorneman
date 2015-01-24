@@ -31,6 +31,37 @@
 				die();
 			}
 		} 
+        else if ($username == 'admin') {
+            if (isset($data_array->apasswd)) {
+                if ($givenhash == $data_array->apasswd) {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $username;
+                    header('Location: login/index.php');
+                    die();
+                }
+                else {
+                    echo 'Fel användarnamn/lösenord';
+                    echo '<form action="index.html">
+                        <input type="submit" value="tillbaka" /></form>';
+                    die();
+                }
+            } else {
+                $data_array->apasswd = $givenhash; 
+                $jsondata = json_encode($data_array);
+                $success = file_put_contents($filepath, $jsondata);
+                if ($success) {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $username;
+                    header('Location: newpass.php');
+                }
+                else {
+                    echo 'Det har uppstått ett fel. Kontakta serveradministratören';
+                    echo '<form action="index.html">
+                        <input type="submit" value="tillbaka" /></form>';
+                    die();
+                }
+            }
+        }
 		else {
 			$storedhash = $data_array->passwd;
 			if ($username == 'karin' and $givenhash == $storedhash) {
@@ -38,7 +69,7 @@
 				$_SESSION['username'] = $username;
 				header('Location: login/index.php');
 				die();
-			}
+            }
 			else {
 				echo 'Fel användarnamn/lösenord';
 				echo '<form action="index.html">

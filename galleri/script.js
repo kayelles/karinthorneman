@@ -1,6 +1,5 @@
 
-/* Script for the image gallery page */
-
+/* Script for the image gallery page */ 
 /*========================================================================== *
 *	TODO list                                                                * 
 *                                                                            *
@@ -129,17 +128,37 @@ function loadCategoryData() {
 	}
 }
 
+//function addCategories() {
+    //var len = categoryData["names"].length;
+    //var categories = categoryData["names"].sort().reverse;
+	//for (i = len - 1; i >= 0 ; i--) {
+		//var categoryTag = '<li id="exh' 
+			//+ i + '" class="clickable category">' 
+			//+ categoryData["names"][i] + '</li>';
+		//nameIDs["exh" + i] = categoryData["names"][i];
+		//$("#exhlist").append(categoryTag);
+	//}
+	////default
+	//$("#exh" + (len - 1)).addClass("focused");
+	//exhibition = nameIDs["exh" + (len - 1)];
+
+//}
+
+
+//sorted version
 function addCategories() {
-	for (i = 0; i < categoryData["names"].length; i++) {
-		var categoryTag = '<li id="exh' 
-			+ i + '" class="clickable category">' 
-			+ categoryData["names"][i] + '</li>';
-		nameIDs["exh" + i] = categoryData["names"][i];
-		$("#exhlist").append(categoryTag);
-	}
-	//default
-	$("#exh0").addClass("focused");
-	exhibition = nameIDs["exh0"];
+    var len = categoryData["names"].length;
+    var categories = categoryData["names"].sort().reverse();
+    for (i = 0; i < categories.length; i++) {
+        var categoryTag = '<li id="exh' 
+            + i + '" class="clickable category">' 
+            + categories[i] + '</li>';
+        nameIDs["exh" + i] = categories[i];
+        $("#exhlist").append(categoryTag);
+    }
+    //default
+    $("#exh0").addClass("focused");
+    exhibition = nameIDs["exh0"];
 }
 
 /*	
@@ -171,6 +190,7 @@ function loadImageData() {
  */
 
 function addImages() {
+    
 	imageCount  = 0;
 	for (i = 0; i < imageData["paths"].length; i++) {
 		var imagetag = '<img data-lightbox="image1" src="' + 
@@ -182,6 +202,26 @@ function addImages() {
 		descList.push(imageData["descs"][i]);
 	}
 	$("#crossfade a:first-child").addClass("opaque");
+    var img = $("#crossfade");
+    img.find($("img")).each(function(i) {
+        var imagewidth = imageData["widths"][i];
+        var scaleRatio = 600 / imagewidth;
+        var scaledHeight = imageData["heights"][i] * scaleRatio;
+        var diff = $(window).height() - scaledHeight;
+        //console.log(diff);
+        //console.log(scaledHeight);
+        //console.log("document " + $(document).height());
+        //console.log("window: " + $(window).height());
+        $(this).css("width","600px");
+        if (diff < 0) {
+            var wScaleRatio = (scaledHeight + (diff - 50)) / scaledHeight;
+            var scaledWidth = 600 * wScaleRatio;
+            $(this).css("width",  + scaledWidth + "px");
+        }
+        else {
+            $(this).css("width", "600px");
+        }
+    });
 }
 
 /*
@@ -205,6 +245,7 @@ function updateImageInfo() {
 	var imagewidth = imageData["widths"][index];
 	var scaleRatio = 600 / imagewidth;
 	var scaledHeight = imageData["heights"][index] * scaleRatio;
+    var diff = $(window).height() - scaledHeight;
 
 	$("#description").empty();
 	$("#description").append(descList[index]);
@@ -214,7 +255,14 @@ function updateImageInfo() {
 	else {
 		$("#container").css("height", 1225);
 	}
-	$("#description").css("top", scaledHeight + 50);
+    if (diff < 0) {
+        console.log("yes");
+        var wScaleRatio = (scaledHeight + (diff - 50)) / scaledHeight;
+        $("#description").css("top", scaledHeight + (diff));
+    }
+    else {
+        $("#description").css("top", scaledHeight + 50);
+    }
 	$("#whichimage").empty();
 	if (imageCount > 0) {
 		$("#whichimage").append("Bild " + (index + 1) + " av " + imageCount);

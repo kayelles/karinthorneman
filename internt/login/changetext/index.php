@@ -84,10 +84,27 @@
         <form   action="changetext.php" 
                 method="post">
 			</br>
-			<input  type="checkbox"
-					checked="true"
-					name="visible" 
-					value="ischecked" />Synlig</br>
+            <input  type="checkbox"
+<?php
+            session_start();
+
+            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+                echo "<p>please log in to see this page</p>";
+                die();
+            }
+            $filepath = '../../../data/text.json';
+            $input = file_get_contents($filepath);
+            $data_array = json_decode($input);
+
+            $flag = $data_array->texts->flag;
+            if (intval($flag) == 1) {
+                echo 'value="ischecked"';
+                echo 'checked="true"';
+            }else {
+                echo 'value="notchecked"';
+            }
+?> 
+                    name="visible" />Synlig</br>
             <textarea 	name="text" 
 						value="" 
 						rows="3" 

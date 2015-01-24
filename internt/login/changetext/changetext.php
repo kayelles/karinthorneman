@@ -25,10 +25,12 @@
 		}
 		else if ($action == "changehometext2") {
 			$res = $data_array;
-			if ($_POST['visible'] == 'ischecked') {
-				$res->texts->visible = "true";
+			if (isset($_POST['visible'])) {
+                $res->texts->visible = "true";
+                $res->texts->flag= "1";
 			}
 			else {
+                $res->texts->flag= "0";
 				$res->texts->visible = "false";
 			}
 			$res->texts->intro2 = $newtext;

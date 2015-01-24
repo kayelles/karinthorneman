@@ -1,0 +1,17 @@
+img {
+	position: relative;
+	padding-top: 25px;
+	padding-right: 25px;
+	width: 200px;
+	height: auto;
+}
+
+img:hover {
+	cursor: pointer;
+}
+
+#images {
+	padding-top: 25px;
+    position : relative;
+}
+
