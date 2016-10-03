@@ -1,1 +1,2 @@
-Website developed for Karin Thorneman. Developer Ludvig Sundström
+
+Personal website developed for Karin Thorneman
